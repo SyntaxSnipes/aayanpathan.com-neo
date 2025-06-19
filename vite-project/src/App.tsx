@@ -72,7 +72,7 @@ function ContactForm() {
     <form
       ref={form}
       onSubmit={sendEmail}
-      className="w-full max-w-2xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg p-6 space-y-5"
+      className="max-w-2xl mx-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg p-6 space-y-5"
     >
       <h2 className="text-2xl font-semibold text-white text-center">
         Send me an email
@@ -213,7 +213,7 @@ function MainContent() {
 
       <div className="relative z-10 flex flex-col items-center justify-center py-40 text-center space-y-10">
         <h2 className="text-3xl md:text-4xl font-bold">About Me</h2>
-        <p className="text-lg md:text-xl text-gray-300 max-w-xl">
+        <p className="text-sm md:text-xl sm:text-lg text-gray-300 max-w-xl px-16 xl:px-0">
           I'm Mohammed Aayan Pathan. I am 16 years old, and I am from India
           though currently residing and studying in the UAE. I have been
           fascinated by technology since I was a toddler, and ever since, I've

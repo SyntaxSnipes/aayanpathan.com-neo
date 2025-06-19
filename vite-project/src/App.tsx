@@ -325,7 +325,7 @@ function MainContent() {
           </Marquee>
         </span>
         <h2 className="text-3xl md:text-4xl font-bold mt-10">Academics</h2>
-        <span className="flex xl:flex-row sm:flex-col gap-6 px-20">
+        <span className="flex xl:flex-row lg:flex-row sm:flex-col xs:flex-col gap-6 px-20">
           <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-4">
             <div className="text-center sm:text-left text-white flex-1">
               <h2 className="text-2xl sm:text-xl font-semibold mb-2">GCSEs</h2>

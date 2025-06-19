@@ -15,7 +15,9 @@ import REACT from "./assets/tech-stack-icons/ReactLogo.svg";
 import PYTHON from "./assets/tech-stack-icons/python-3.svg";
 import EXPRESS from "./assets/tech-stack-icons/expresslogo.svg";
 import emailjs from "@emailjs/browser";
-import "./App.css";
+import './index.css';
+import './App.css';
+
 
 declare global {
   interface Window {

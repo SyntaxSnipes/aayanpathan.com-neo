@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { SyncLoader } from "react-spinners";
 import { Typewriter } from "react-simple-typewriter";
-import { ParallaxProvider, Parallax } from "react-scroll-parallax";
+import { motion, useScroll, useTransform } from "framer-motion";
 import FMImg from "./assets/FM.png";
 import MIBgif from "./assets/mib.gif";
 import Marquee from "react-fast-marquee";
@@ -15,14 +16,35 @@ import REACT from "./assets/tech-stack-icons/ReactLogo.svg";
 import PYTHON from "./assets/tech-stack-icons/python-3.svg";
 import EXPRESS from "./assets/tech-stack-icons/expresslogo.svg";
 import emailjs from "@emailjs/browser";
-import './index.css';
-import './App.css';
-
+import "./index.css";
+import "./App.css";
 
 declare global {
   interface Window {
     VANTA: any;
   }
+}
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
+function ParallaxCard({ children }: any) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
+  return (
+    <div ref={ref} className="relative">
+      {" "}
+      {/* ← add position here */}
+      <motion.div style={{ y }}>{children}</motion.div>
+    </div>
+  );
 }
 
 function ContactForm() {
@@ -112,12 +134,13 @@ function ContactForm() {
   );
 }
 
-function Header() {
+function Header({ setLoading }: { setLoading: (loading: boolean) => void }) {
+  const [isVantaReady, setIsVantaReady] = useState(false);
   const [vantaEffect, setVantaEffect] = useState<any>(null);
   const vantaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!vantaEffect && window.VANTA && window.VANTA.NET) {
+    if (!vantaEffect && window.VANTA?.NET && vantaRef.current) {
       const effect = window.VANTA.NET({
         el: vantaRef.current,
         mouseControls: true,
@@ -128,46 +151,67 @@ function Header() {
         scale: 1.0,
         scaleMobile: 1.0,
         color: 0xffffff,
-        backgroundColor: 0x80809,
+        backgroundColor: 0x080809,
         points: 20.0,
         maxDistance: 23.0,
         spacing: 20.0,
       });
+
       setVantaEffect(effect);
+
+      // Delay to simulate Vanta load completion
+      setTimeout(() => {
+        setIsVantaReady(true);
+        setLoading(false); // 🔁 Signals the app to stop showing loader
+      }, 800);
     }
 
+    // Cleanup
     return () => {
       if (vantaEffect) vantaEffect.destroy();
     };
-  }, [vantaEffect]);
+  }, [vantaEffect, setLoading]);
 
   return (
-    <div className="relative w-screen min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      <div ref={vantaRef} className="absolute inset-0 z-0 opacity-25" />
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
-        <header>
-          <h1 className="text-5xl md:text-6xl lg:text-8xl font-heading font-bold">
-            Mohammed Aayan
-          </h1>
-          <p className="mt-4 text-m md:text-xl text-gray-300 font-body">
-            <Typewriter
-              cursor
-              cursorBlinking
-              delaySpeed={1250}
-              deleteSpeed={40}
-              loop={0}
-              typeSpeed={80}
-              words={[
-                "Crafting intelligent, minimal, cohesive code",
-                "Full-Stack Web Developer",
-                "Infusing Artificial Intelligence with user-ended applications",
-                "MySQL-ERN technology stack",
-              ]}
-            />
-          </p>
-        </header>
+    <>
+      {!isVantaReady && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black">
+          <SyncLoader
+            color="#38bdf8"
+            loading={!isVantaReady}
+            size={15}
+            aria-label="Loading Spinner"
+          />
+        </div>
+      )}
+
+      <div className="relative w-screen min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div ref={vantaRef} className="absolute inset-0 z-0 opacity-25" />
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
+          <header>
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-heading font-bold">
+              Mohammed Aayan
+            </h1>
+            <p className="mt-4 text-m md:text-xl text-gray-300 font-body">
+              <Typewriter
+                cursor
+                cursorBlinking
+                delaySpeed={1250}
+                deleteSpeed={40}
+                loop={0}
+                typeSpeed={80}
+                words={[
+                  "Crafting intelligent, minimal, cohesive code",
+                  "Full-Stack Web Developer",
+                  "Infusing Artificial Intelligence with user-ended applications",
+                  "MySQL-ERN technology stack",
+                ]}
+              />
+            </p>
+          </header>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -203,6 +247,18 @@ function MainContent() {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);
+  const techs = [
+  { src: REACT,   url: "https://reactjs.org" },
+  { src: JS,      url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { src: TAILWIND,url: "https://tailwindcss.com" },
+  { src: CSS,     url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { src: HTML5,   url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { src: NODE,    url: "https://nodejs.org" },
+  { src: MySQL,   url: "https://www.mysql.com" },
+  { src: PYTHON,  url: "https://www.python.org" },
+  { src: EXPRESS, url: "https://expressjs.com" },
+];
+
 
   return (
     <section className="relative w-screen min-h-screen overflow-x-hidden text-white">
@@ -223,12 +279,13 @@ function MainContent() {
         </p>
         <h2 className="text-3xl md:text-4xl font-bold mt-10">My Projects</h2>
         <div>
-          <Parallax speed={5}>
+          
+          <ParallaxCard>
             <div className="flex flex-col items-center mt-10 px-4">
-              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6 object-contain">
                 <div className="text-center sm:text-left text-white flex-1">
                   <h2 className="text-2xl sm:text-xl font-semibold mb-2">
-                    FormulaMetric
+                    FormulaMetric{" "}
                   </h2>
                   <p className="text-gray-300 text-md sm:text-sm">
                     An intelligent F1 performance analytics tool built using
@@ -244,8 +301,8 @@ function MainContent() {
                 />
               </div>
             </div>
-          </Parallax>
-          <Parallax speed={5}>
+          </ParallaxCard>
+          <ParallaxCard>
             <div className="flex flex-col items-center mt-10 px-4">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6 object-contain">
                 <div className="text-center sm:text-left text-white flex-1">
@@ -270,9 +327,8 @@ function MainContent() {
                 />
               </div>
             </div>
-          </Parallax>
-
-          <Parallax speed={5}>
+          </ParallaxCard>
+          <ParallaxCard>
             <div className="flex flex-col items-center mt-10 px-4">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-4">
                 <div className="text-center sm:text-left text-white flex-1">
@@ -294,36 +350,27 @@ function MainContent() {
                 />
               </div>
             </div>
-          </Parallax>
+          </ParallaxCard>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold mt-10">Technologies</h2>
-        <span className="py-3">
-          <Marquee autoFill className="gap-8 px-2">
-            {[
-              REACT,
-              JS,
-              TAILWIND,
-              CSS,
-              HTML5,
-              NODE,
-              MySQL,
-              PYTHON,
-              EXPRESS,
-            ].map((src, i) => {
-              const isExpress = src === EXPRESS;
-              return (
-                <img
-                  key={i}
-                  src={src}
-                  alt=""
-                  className={`h-28 xl:h-48 sm:h-15 mx-8 grayscale opacity-80 hover:grayscale-0 focus:grayscale-0 transition duration-300
-                  ${isExpress ? "invert" : ""}
-                `}
-                />
-              );
-            })}
-          </Marquee>
-        </span>
+<h2 className="text-3xl md:text-4xl font-bold mt-10">Technologies</h2>
+<Marquee autoFill className="gap-8 px-2">
+  {techs.map(({ src, url }, i) => (
+    <a
+      key={i}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="cursor-pointer"
+    >
+      <img
+        src={src}
+        alt=""
+        className="h-28 xl:h-48 sm:h-15 mx-8 grayscale opacity-80 hover:grayscale-0 transition duration-300"
+      />
+    </a>
+  ))}
+</Marquee>
+
         <h2 className="text-3xl md:text-4xl font-bold mt-10">Academics</h2>
         <span className="flex flex-col lg:flex-row xl:flex-row gap-6 px-4 sm:px-8 lg:px-20">
           <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-4">
@@ -348,29 +395,69 @@ function MainContent() {
                 following subjects: <br /> Mathematics, Further Mathematics,
                 Physics, Computer Science
               </p>
-              <h3>Grades: Predicted A* in Math, Predicted A in Physics and Computer Science</h3>
+              <h3>
+                Grades: Predicted A* in Math, Predicted A in Physics and
+                Computer Science
+              </h3>
             </div>
           </div>
         </span>
         <h2 className="text-3xl md:text-4xl font-bold mt-10">Contact Me</h2>
         <ContactForm />
       </div>
-          <footer className="w-full h-50 gap-7 flex flex-col">
-      <h3 className="text-3xl md:text-4xl font-bold mt-2">My CV and Platforms</h3>
-      <span className="flex flex-row gap-10 items-center justify-center"><a className="hover:underline text-cyan-400" target="_blank"href="https://www.linkedin.com/notifications/?filter=all">LinkedIn Profile</a><a className="hover:underline text-cyan-400" target="_blank"href="../mycv.pdf">CV</a><a className="hover:underline text-cyan-400" target="_blank" href="https://github.com/SyntaxSnipes">GitHub Profile</a></span>
-    </footer>
+      <footer className="w-full h-50 gap-7 flex flex-col">
+        <h3 className="text-3xl md:text-4xl font-bold mt-2">
+          My CV and Platforms
+        </h3>
+        <span className="flex flex-row gap-10 items-center justify-center">
+          <a
+            className="hover:underline text-cyan-400"
+            target="_blank"
+            href="https://www.linkedin.com/notifications/?filter=all"
+          >
+            LinkedIn Profile
+          </a>
+          <a
+            className="hover:underline text-cyan-400"
+            target="_blank"
+            href="../mycv.pdf"
+          >
+            CV
+          </a>
+          <a
+            className="hover:underline text-cyan-400"
+            target="_blank"
+            href="https://github.com/SyntaxSnipes"
+          >
+            GitHub Profile
+          </a>
+        </span>
+      </footer>
     </section>
   );
 }
 
-
 function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
-    <ParallaxProvider>
-      <Header />
+    <>
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+          <SyncLoader
+            color="#ffffff"
+            loading={true}
+            cssOverride={override}
+            size={150}
+          />
+        </div>
+      )}
+
+      <Header setLoading={setLoading} />
       <MainContent />
-    </ParallaxProvider>
+    </>
   );
 }
+
 
 export default App;

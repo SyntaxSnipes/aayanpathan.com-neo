@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SyncLoader } from "react-spinners";
 import { Typewriter } from "react-simple-typewriter";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import FMImg from "./assets/FM.png";
 import MIBgif from "./assets/mib.gif";
 import Marquee from "react-fast-marquee";
@@ -29,23 +29,6 @@ const override: CSSProperties = {
   margin: "0 auto",
   borderColor: "red",
 };
-
-function ParallaxCard({ children }: any) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
-  return (
-    <div ref={ref} className="relative">
-      {" "}
-      {/* ← add position here */}
-      <motion.div style={{ y }}>{children}</motion.div>
-    </div>
-  );
-}
 
 function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
@@ -248,17 +231,16 @@ function MainContent() {
     };
   }, [vantaEffect]);
   const techs = [
-  { src: REACT,   url: "https://reactjs.org" },
-  { src: JS,      url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-  { src: TAILWIND,url: "https://tailwindcss.com" },
-  { src: CSS,     url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-  { src: HTML5,   url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-  { src: NODE,    url: "https://nodejs.org" },
-  { src: MySQL,   url: "https://www.mysql.com" },
-  { src: PYTHON,  url: "https://www.python.org" },
-  { src: EXPRESS, url: "https://expressjs.com" },
-];
-
+    { src: REACT, url: "https://reactjs.org" },
+    { src: JS, url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+    { src: TAILWIND, url: "https://tailwindcss.com" },
+    { src: CSS, url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+    { src: HTML5, url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+    { src: NODE, url: "https://nodejs.org" },
+    { src: MySQL, url: "https://www.mysql.com" },
+    { src: PYTHON, url: "https://www.python.org" },
+    { src: EXPRESS, url: "https://expressjs.com" },
+  ];
 
   return (
     <section className="relative w-screen min-h-screen overflow-x-hidden text-white">
@@ -279,8 +261,12 @@ function MainContent() {
         </p>
         <h2 className="text-3xl md:text-4xl font-bold mt-10">My Projects</h2>
         <div>
-          
-          <ParallaxCard>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <div className="flex flex-col items-center mt-10 px-4">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6 object-contain">
                 <div className="text-center sm:text-left text-white flex-1">
@@ -301,8 +287,13 @@ function MainContent() {
                 />
               </div>
             </div>
-          </ParallaxCard>
-          <ParallaxCard>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <div className="flex flex-col items-center mt-10 px-4">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6 object-contain">
                 <div className="text-center sm:text-left text-white flex-1">
@@ -327,8 +318,13 @@ function MainContent() {
                 />
               </div>
             </div>
-          </ParallaxCard>
-          <ParallaxCard>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <div className="flex flex-col items-center mt-10 px-4">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-4">
                 <div className="text-center sm:text-left text-white flex-1">
@@ -350,26 +346,26 @@ function MainContent() {
                 />
               </div>
             </div>
-          </ParallaxCard>
+          </motion.div>
         </div>
-<h2 className="text-3xl md:text-4xl font-bold mt-10">Technologies</h2>
-<Marquee autoFill className="gap-8 px-2">
-  {techs.map(({ src, url }, i) => (
-    <a
-      key={i}
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="cursor-pointer"
-    >
-      <img
-        src={src}
-        alt=""
-        className="h-28 xl:h-48 sm:h-15 mx-8 grayscale opacity-80 hover:grayscale-0 transition duration-300"
-      />
-    </a>
-  ))}
-</Marquee>
+        <h2 className="text-3xl md:text-4xl font-bold mt-10">Technologies</h2>
+        <Marquee autoFill className="gap-8 px-2">
+          {techs.map(({ src, url }, i) => (
+            <a
+              key={i}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src={src}
+                alt=""
+                className="h-28 xl:h-48 sm:h-15 mx-8 grayscale opacity-80 hover:grayscale-0 transition duration-300"
+              />
+            </a>
+          ))}
+        </Marquee>
 
         <h2 className="text-3xl md:text-4xl font-bold mt-10">Academics</h2>
         <span className="flex flex-col lg:flex-row xl:flex-row gap-6 px-4 sm:px-8 lg:px-20">
@@ -458,6 +454,5 @@ function App() {
     </>
   );
 }
-
 
 export default App;

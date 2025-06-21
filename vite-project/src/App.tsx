@@ -409,7 +409,7 @@ function MainContent() {
           <a
             className="hover:underline text-cyan-400"
             target="_blank"
-            href="https://www.linkedin.com/notifications/?filter=all"
+            href="https://www.linkedin.com/in/mohammed-aayan-pathan/"
           >
             LinkedIn Profile
           </a>

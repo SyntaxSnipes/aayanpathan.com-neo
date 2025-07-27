@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Typewriter } from "react-simple-typewriter";
 import FMImg from "./assets/FM.png";
@@ -26,11 +26,6 @@ declare global {
     VANTA: any;
   }
 }
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
 
 function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
@@ -135,17 +130,16 @@ function ContactForm() {
   );
 }
 
-export function Header({ setLoading }: { setLoading: (loading: boolean) => void }) {
-  const vantaRef = useRef<HTMLDivElement>(null);
-  const vantaEffect = useRef<any>(null);
+
+const Header: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const effectRef = useRef<any>(null);
 
   useEffect(() => {
-    let idleId: number;
-
-    const initVanta = () => {
-      if (vantaRef.current) {
-        vantaEffect.current = window.VANTA.NET({
-          el: vantaRef.current,
+    const init = () => {
+      if (window.VANTA && containerRef.current) {
+        effectRef.current = window.VANTA.NET({
+          el: containerRef.current,
           mouseControls: true,
           touchControls: true,
           gyroControls: true,
@@ -155,35 +149,34 @@ export function Header({ setLoading }: { setLoading: (loading: boolean) => void 
           scaleMobile: 1.0,
           color: 0xffffff,
           backgroundColor: 0x080809,
-          points: window.innerWidth < 640 ? 10 : 20,
-          maxDistance: window.innerWidth < 640 ? 15 : 23,
+          points: window.innerWidth < 640 ? 8 : 16,
+          maxDistance: window.innerWidth < 640 ? 12 : 20,
           spacing: 20.0,
         });
-        setLoading(false);
       }
     };
 
-    if (window.requestIdleCallback) {
-      idleId = window.requestIdleCallback(initVanta);
-    } else {
-      idleId = window.setTimeout(initVanta, 500);
-    }
+    // init Vanta when browser is idle (or immediately)
+    const idleId =
+      window.requestIdleCallback?.(init) ??
+      window.setTimeout(init, 0);
 
     return () => {
-      if (window.cancelIdleCallback) window.cancelIdleCallback(idleId);
-      else window.clearTimeout(idleId);
-      vantaEffect.current?.destroy();
+      window.cancelIdleCallback
+        ? window.cancelIdleCallback(idleId)
+        : window.clearTimeout(idleId);
+      effectRef.current?.destroy();
     };
-  }, [setLoading]);
+  }, []);
 
   return (
     <div className="relative w-screen min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Vanta background */}
-      <div ref={vantaRef} className="absolute inset-0 z-0 opacity-25" />
+      {/* Vanta canvas behind everything */}
+      <div ref={containerRef} className="absolute inset-0 z-0 opacity-25" />
 
       {/* Foreground content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-        <h1 className="text-5xl md:text-6xl lg:text-8xl font-heading font-bold">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+        <h1 className="text-5xl md:text-6xl lg:text-8xl font-heading font-bold text-white">
           Mohammed Aayan
         </h1>
         <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-xl">
@@ -196,7 +189,6 @@ export function Header({ setLoading }: { setLoading: (loading: boolean) => void 
             ]}
             loop={0}
             cursor
-            cursorStyle="|"
             typeSpeed={80}
             deleteSpeed={40}
             delaySpeed={1250}
@@ -205,7 +197,7 @@ export function Header({ setLoading }: { setLoading: (loading: boolean) => void 
       </div>
     </div>
   );
-}
+};
 
 function MainContent() {
   const vantaRef = useRef<HTMLDivElement>(null);
@@ -271,78 +263,106 @@ function MainContent() {
           practically everything! I am currently in Year 12, on my first year of
           the A Level course in GEMS Founders School Al Barsha.
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold mt-10">My Experience</h2>
-        <div className="flex flex-col items-center mt-4 px-4">
-          <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg hover:shadow-[#34d399]/30 transition-shadow duration-300 relative overflow-hidden group">
-            {/* Gradient left accent */}
-            <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#34d399] via-transparent to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+        <section id="experience" className="w-full px-4 sm:px-6 lg:px-8 py-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-8">
+            My Experience
+          </h2>
 
-            {/* Inner content */}
-            <div className="p-6 sm:p-8 space-y-4">
-              {/* Header Row */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <img
-                    src={voxa}
-                    alt="VOXA logo"
-                    className="w-10 h-10 rounded-md object-contain bg-[#a7f3d0]/10 p-1 border border-[#34d399]/30"
-                  />
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-white text-lg sm:text-xl font-semibold leading-none">
-                      Product & App Development Intern
+          <div
+            className="
+      max-w-4xl mx-auto
+      bg-white/10 backdrop-blur-md
+      border border-white/20
+      rounded-2xl
+      shadow-lg
+      overflow-hidden
+
+      /* make whole card hoverable */
+      group
+      transition-shadow duration-300
+      hover:shadow-[#34d399]/30
+    "
+          >
+            {/* we no longer need `group` here – it’s on the outer div */}
+            <div className="relative">
+              {/* left accent bar */}
+              <div
+                className="
+          absolute inset-y-0 left-0 w-1
+          bg-gradient-to-b from-[#34d399] via-transparent to-transparent
+          opacity-70
+          transition-opacity duration-300
+          group-hover:opacity-100
+        "
+              />
+
+              <div className="p-6 sm:p-8 space-y-6">
+                {/* header row */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={voxa}
+                      alt="Voxa logo"
+                      className="w-10 h-10 rounded-md bg-[#a7f3d0]/10 p-1 border border-[#34d399]/30"
+                    />
+                    <h3 className="text-xl sm:text-2xl font-semibold text-white leading-tight">
+                      Product &amp; App Development Intern
                     </h3>
-                    <span className="text-sm sm:text-base text-gray-500 leading-none mt-[2px]">
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm sm:text-base text-gray-400">
                       2025
                     </span>
+                    <a
+                      href="https://voxa.club"
+                      target="_blank"
+                      className="text-sm sm:text-base text-[#34d399] hover:underline"
+                      rel="noopener noreferrer"
+                    >
+                      Visit →
+                    </a>
                   </div>
                 </div>
-                <a
-                  href="https://voxa.club"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-[#34d399] hover:underline"
-                >
-                  Visit →
-                </a>
-              </div>
 
-              {/* Description */}
-              <p className="text-sm text-gray-300 leading-relaxed">
-                As part of a cross-functional development team, I contributed to
-                building <strong>Voxa</strong> — a full-stack, AI-powered web
-                application designed to enhance public speaking skills. I worked
-                on everything from voice processing to user experience,
-                integrating real-time transcription, feedback mechanisms, and
-                gamified user progress.
-              </p>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                I deployed the application using <strong>Vercel</strong> and
-                maintained version control via <strong>GitHub</strong>,
-                collaborating with developers to review code, manage issues, and
-                deliver scalable solutions. My role demanded adaptability,
-                attention to detail, and clear communication with both technical
-                and non-technical stakeholders. Learn more in the My Projects
-                section.
-              </p>
+                {/* content paragraphs */}
+                <div className="space-y-4">
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">
+                    As part of a cross‑functional development team, I
+                    contributed to building <strong>Voxa</strong> — a
+                    full‑stack, AI‑powered web application designed to enhance
+                    public speaking skills. I worked on everything from voice
+                    processing to user experience, integrating real‑time
+                    transcription, feedback mechanisms, and gamified user
+                    progress.
+                  </p>
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">
+                    I deployed the app on <strong>Vercel</strong> and managed
+                    version control via <strong>GitHub</strong>, collaborating
+                    closely with developers to review code, manage issues, and
+                    deliver scalable solutions.
+                  </p>
+                </div>
 
-              {/* Feature Highlights */}
-              <div className="grid sm:grid-cols-3 gap-4 text-sm mt-4">
-                <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
-                  AssemblyAI WebSocket live transcription and OpenAI API rapid
-                  personalized feedback.
-                </div>
-                <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
-                  Firebase Auth, Firestore, and Storage integration with NextJS
-                  Routes.
-                </div>
-                <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
-                  Engaging XP system, onboarding flow & performance analytics
-                  for seammless user-experience.
+                {/* feature grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
+                    AssemblyAI WebSocket live transcription and OpenAI API rapid
+                    personalized feedback.
+                  </div>
+                  <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
+                    Firebase Auth, Firestore, and Storage integration with
+                    Next.js Routes.
+                  </div>
+                  <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
+                    Engaging XP system, onboarding flow & performance analytics
+                    for seamless user experience.
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
         <h2 className="text-3xl md:text-4xl font-bold mt-10">My Projects</h2>
         <div>
           {/* FormulaMetric – Red */}
@@ -536,26 +556,27 @@ function MainContent() {
   );
 }
 
-function App() {
-  const [loading, setLoading] = useState(true);
+const Loader: React.FC = () => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+    <SyncLoader color="#ffffff" loading size={50} />
+  </div>
+);
+
+const App: React.FC = () => {
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const id = setTimeout(() => setShowLoader(false), 2000);
+    return () => clearTimeout(id);
+  }, []);
 
   return (
     <>
-      {loading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-          <SyncLoader
-            color="#ffffff"
-            loading={true}
-            cssOverride={override}
-            size={150}
-          />
-        </div>
-      )}
-
-      <Header setLoading={setLoading} />
+      {showLoader && <Loader />}
+      <Header />
       <MainContent />
     </>
   );
-}
+};
 
 export default App;

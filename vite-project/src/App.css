@@ -19,3 +19,33 @@
 .subtitle {
   @apply text-xl font-semibold text-white text-center;
 }
+/* Make a child stretch edge-to-edge even inside a centered container */
+.full-bleed {
+  position: relative;
+  width: 100vw;               /* span the viewport */
+  left: 50%;
+  right: 50%;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+/* Optional: soft fades on both sides */
+.edge-fades::before,
+.edge-fades::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 7rem;                /* tweak fade width */
+  pointer-events: none;
+  z-index: 20;
+}
+.edge-fades::before {
+  left: 0;
+  background: linear-gradient(to right, #080809, rgba(8,8,9,0));
+}
+.edge-fades::after {
+  right: 0;
+  background: linear-gradient(to left, #080809, rgba(8,8,9,0));
+}
+

@@ -414,7 +414,15 @@ function MainContent() {
         <section className="section section-pad">
           <div className="section-stack">
             <h2 className="section-title">Technologies</h2>
-            <Marquee autoFill className="gap-8 px-2">
+          </div>
+
+          {/* Full-bleed marquee (escapes the centered container) */}
+          <div className="relative w-screen max-w-[100vw] left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden">
+            {/* Edge fades to page background (#080809) */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-32 z-20 bg-gradient-to-r from-[#080809] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 z-20 bg-gradient-to-l from-[#080809] to-transparent" />
+
+            <Marquee autoFill pauseOnHover speed={35} className="py-2">
               {techs.map(({ src, url }, i) => {
                 const isExpressOrNext = src === EXPRESS || src === NEXT;
                 return (
@@ -444,38 +452,38 @@ function MainContent() {
         <section id="academics" className="section section-pad">
           <div className="section-stack">
             <h2 className="section-title">Academics</h2>
+
             <div className="flex flex-col lg:flex-row gap-8">
+              {/* GCSEs */}
               <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/20">
-                <h3 className="subtitle">GCSEs</h3>
-                <p className="text-white/80 text-center">
-                  {" "}
+                <h3 className="subtitle mb-4">GCSEs</h3>
+                <p className="text-white/80 text-center mb-2">
                   <strong>School:</strong> GEMS Founders School — Al Barsha
                 </p>
-                <p className="text-white/70 text-center text-sm leading-relaxed">
+                <p className="text-white/70 text-center text-sm leading-relaxed mb-6">
                   <strong className="text-white">Subjects:</strong> Mathematics,
                   Computer Science, Chemistry, Psychology, Physics, Business,
                   English Literature, English Language, Further Pure
                   Mathematics.
                 </p>
-                <div className="flex justify-center pt-4">
+                <div className="flex justify-center">
                   <span className="inline-block text-cyan-400 border border-cyan-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-cyan-400 hover:text-black transition-colors duration-300">
                     Grades: 999988877
                   </span>
                 </div>
               </div>
 
+              {/* A-Levels */}
               <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-emerald-500/20 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <h3 className="subtitle">A-Levels</h3>
-                  <p className="text-white/80 text-center">
-                    <strong>School:</strong> GEMS Founders School — Al Barsha
-                  </p>
-                  <p className="text-white/70 text-center text-sm leading-relaxed">
-                    <strong className="text-white">Subjects:</strong>{" "}
-                    Mathematics, Further Mathematics, Physics, Computer Science.
-                  </p>
-                </div>
-                <div className="flex justify-center pt-4">
+                <h3 className="subtitle mb-4">A-Levels</h3>
+                <p className="text-white/80 text-center mb-2">
+                  <strong>School:</strong> GEMS Founders School — Al Barsha
+                </p>
+                <p className="text-white/70 text-center text-sm leading-relaxed mb-6">
+                  <strong className="text-white">Subjects:</strong> Mathematics,
+                  Further Mathematics, Physics, Computer Science.
+                </p>
+                <div className="flex justify-center">
                   <span className="inline-block text-emerald-400 border border-emerald-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-emerald-400 hover:text-black transition-colors duration-300">
                     A* in A-Level Math, A in AS-Level Physics, predicted A* in
                     Physics and CS

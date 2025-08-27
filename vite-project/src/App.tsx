@@ -250,18 +250,18 @@ function MainContent() {
     <section className="relative w-screen min-h-screen overflow-x-hidden text-white">
       <div
         ref={vantaRef}
-        className="absolute top-0 left-0 w-full h-full -z-10 opacity-30 pointer-events-none backdrop-blur-md"
+        className="absolute inset-0 z-0 opacity-30 pointer-events-none background-blur-md"
       />
 
       <div className="relative z-10 flex flex-col items-center justify-center py-40 text-center space-y-10">
         <h2 className="text-3xl md:text-4xl font-bold">About Me</h2>
         <p className="text-sm md:text-xl sm:text-lg text-gray-300 max-w-xl px-16 xl:px-0">
-          I'm Mohammed Aayan Pathan. I am 16 years old, and I am from India
+          I'm Mohammed Aayan Pathan. I am 17 years old, and I am from India
           though currently residing and studying in the UAE. I have been
           fascinated by technology since I was a toddler, and ever since, I've
           been on a journey to understand and leverage technology for
-          practically everything! I am currently in Year 12, on my first year of
-          the A Level course in GEMS Founders School Al Barsha.
+          practically everything! I am currently in Year 13, on my last year of
+          the A-Level course in GEMS Founders School Al Barsha.
         </p>
         <section id="experience" className="w-full px-4 sm:px-6 lg:px-8 py-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-8">
@@ -514,7 +514,7 @@ function MainContent() {
               </div>
               <div className="flex justify-center">
                 <span className="inline-block text-emerald-400 border border-emerald-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-emerald-400 hover:text-black transition-colors duration-300">
-                  Predicted: A* in Math, A in Physics & CS
+                  A* in A-Level Math, A in AS-Level Physics, predicted A* in Physics and CS
                 </span>
               </div>
             </div>

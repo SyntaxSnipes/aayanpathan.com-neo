@@ -130,7 +130,6 @@ function ContactForm() {
   );
 }
 
-
 const Header: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const effectRef = useRef<any>(null);
@@ -158,8 +157,7 @@ const Header: React.FC = () => {
 
     // init Vanta when browser is idle (or immediately)
     const idleId =
-      window.requestIdleCallback?.(init) ??
-      window.setTimeout(init, 0);
+      window.requestIdleCallback?.(init) ?? window.setTimeout(init, 0);
 
     return () => {
       window.cancelIdleCallback
@@ -250,112 +248,88 @@ function MainContent() {
     <section className="relative w-screen min-h-screen overflow-x-hidden text-white">
       <div
         ref={vantaRef}
-        className="absolute inset-0 z-0 opacity-30 pointer-events-none background-blur-md"
+        className="absolute inset-0 z-0 opacity-30 pointer-events-none backdrop-blur-md"
       />
 
-      <div className="relative z-10 flex flex-col items-center justify-center py-40 text-center space-y-10">
-        <h2 className="text-3xl md:text-4xl font-bold">About Me</h2>
-        <p className="text-sm md:text-xl sm:text-lg text-gray-300 max-w-xl px-16 xl:px-0">
-          I'm Mohammed Aayan Pathan. I am 17 years old, and I am from India
-          though currently residing and studying in the UAE. I have been
-          fascinated by technology since I was a toddler, and ever since, I've
-          been on a journey to understand and leverage technology for
-          practically everything! I am currently in Year 13, on my last year of
-          the A-Level course in GEMS Founders School Al Barsha.
-        </p>
-        <section id="experience" className="w-full px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-8">
-            My Experience
-          </h2>
+      <div className="relative z-10 section section-pad section-stack">
+        <div className="relative z-10 section section-pad section-stack">
+          <h2 className="section-title">About Me</h2>
+          <p className="text-sm md:text-xl sm:text-lg text-gray-300 max-w-xl px-16 xl:px-0">
+            I'm Mohammed Aayan Pathan. I am 17 years old, and I am from India
+            though currently residing and studying in the UAE. I have been
+            fascinated by technology since I was a toddler, and ever since, I've
+            been on a journey to understand and leverage technology for
+            practically everything! I am currently in Year 13, on my last year
+            of the A-Level course in GEMS Founders School Al Barsha.
+          </p>
+        </div>
 
-          <div
-            className="
-      max-w-4xl mx-auto
-      bg-white/10 backdrop-blur-md
-      border border-white/20
-      rounded-2xl
-      shadow-lg
-      overflow-hidden
+        <section id="experience" className="section section-pad">
+          <div className="section-stack">
+            <h2 className="section-title">My Experience</h2>
 
-      /* make whole card hoverable */
-      group
-      transition-shadow duration-300
-      hover:shadow-[#34d399]/30
-    "
-          >
-            {/* we no longer need `group` here – it’s on the outer div */}
-            <div className="relative">
-              {/* left accent bar */}
-              <div
-                className="
-          absolute inset-y-0 left-0 w-1
-          bg-gradient-to-b from-[#34d399] via-transparent to-transparent
-          opacity-70
-          transition-opacity duration-300
-          group-hover:opacity-100
-        "
-              />
-
-              <div className="p-6 sm:p-8 space-y-6">
-                {/* header row */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={voxa}
-                      alt="Voxa logo"
-                      className="w-10 h-10 rounded-md bg-[#a7f3d0]/10 p-1 border border-[#34d399]/30"
-                    />
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white leading-tight">
-                      Product &amp; App Development Intern
-                    </h3>
+            <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg overflow-hidden group transition-shadow duration-300 hover:shadow-[#34d399]/30">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#34d399] via-transparent to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="p-6 sm:p-8 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={voxa}
+                        alt="Voxa logo"
+                        className="w-10 h-10 rounded-md bg-[#a7f3d0]/10 p-1 border border-[#34d399]/30"
+                      />
+                      <h3 className="subtitle">
+                        Product &amp; App Development Intern
+                      </h3>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm sm:text-base text-gray-400">
+                        2025
+                      </span>
+                      <a
+                        href="https://voxa.club"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm sm:text-base text-[#34d399] hover:underline"
+                      >
+                        Visit →
+                      </a>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm sm:text-base text-gray-400">
-                      2025
-                    </span>
-                    <a
-                      href="https://voxa.club"
-                      target="_blank"
-                      className="text-sm sm:text-base text-[#34d399] hover:underline"
-                      rel="noopener noreferrer"
-                    >
-                      Visit →
-                    </a>
-                  </div>
-                </div>
 
-                {/* content paragraphs */}
-                <div className="space-y-4">
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">
-                    As part of a cross‑functional development team, I
-                    contributed to building <strong>Voxa</strong> — a
-                    full‑stack, AI‑powered web application designed to enhance
-                    public speaking skills. I worked on everything from voice
-                    processing to user experience, integrating real‑time
-                    transcription, feedback mechanisms, and gamified user
-                    progress.
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">
-                    I deployed the app on <strong>Vercel</strong> and managed
-                    version control via <strong>GitHub</strong>, collaborating
-                    closely with developers to review code, manage issues, and
-                    deliver scalable solutions.
-                  </p>
-                </div>
+                  <div className="space-y-4">
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">
+                      As part of a cross-functional development team, I
+                      contributed to building
+                      <strong> Voxa </strong>— a full-stack, AI-powered web
+                      application designed to enhance public speaking skills. I
+                      worked on everything from voice processing to user
+                      experience, integrating real-time transcription, feedback
+                      mechanisms, and gamified user progress.
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">
+                      I deployed the app on <strong>Vercel</strong> and managed
+                      version control via
+                      <strong> GitHub</strong>, collaborating closely with
+                      developers to review code, manage issues, and deliver
+                      scalable solutions.
+                    </p>
+                  </div>
 
-                {/* feature grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
-                    AssemblyAI WebSocket live transcription and OpenAI API rapid
-                    personalized feedback.
-                  </div>
-                  <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
-                    Firebase Auth, Firestore, and Storage integration with
-                    Next.js Routes.
-                  </div>
-                  <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
-                    Engaging XP system, onboarding flow & performance analytics
-                    for seamless user experience.
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
+                      AssemblyAI WebSocket live transcription and OpenAI API
+                      rapid personalized feedback.
+                    </div>
+                    <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
+                      Firebase Auth, Firestore, and Storage integration with
+                      Next.js Routes.
+                    </div>
+                    <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 hover:bg-[#34d399]/10 transition flex items-center justify-center text-center">
+                      Engaging XP system, onboarding flow & performance
+                      analytics.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -363,166 +337,161 @@ function MainContent() {
           </div>
         </section>
 
-        <h2 className="text-3xl md:text-4xl font-bold mt-10">My Projects</h2>
-        <div>
-          {/* FormulaMetric – Red */}
-          <div className="flex flex-col items-center mt-10 px-4">
-            <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-rose-500 hover:bg-gradient-to-br hover:from-rose-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-              <div className="text-center sm:text-left text-white flex-1">
-                <h2 className="text-2xl sm:text-xl font-semibold mb-2">
-                  FormulaMetric
-                </h2>
-                <p className="text-gray-300 text-md sm:text-sm">
-                  An intelligent F1 performance analytics tool built using
-                  MySQL-ERN stack and advanced statistical models. In
-                  Progress...
-                </p>
-              </div>
-              <img
-                src={FMImg}
-                alt="FormulaMetric Screenshot"
-                className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
-              />
-            </div>
-          </div>
+        <section className="section section-pad">
+          <div className="section-stack">
+            <h2 className="section-title">My Projects</h2>
 
-          {/* Voxa – Green */}
-          <div className="flex flex-col items-center mt-10 px-4">
-            <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-emerald-400 hover:bg-gradient-to-br hover:from-emerald-400/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-              <div className="text-center sm:text-left text-white flex-1">
-                <h2 className="text-2xl sm:text-xl font-semibold mb-2">
-                  Voxa Voice App
-                </h2>
-                <p className="text-gray-300 text-md sm:text-sm">
-                  Voxa is an AI-powered public speaking coach that helps users
-                  improve their communication through real-time transcription,
-                  instant feedback, and a supportive community. Built with
-                  Next.js, React, Firebase, and AssemblyAI, it also includes
-                  gamified XP and level tracking to encourage regular practice.
-                </p>
-                <a
-                  href="https://voxa.club"
-                  className="text-emerald-400 hover:underline"
-                  target="_blank"
-                >
-                  View Website
-                </a>
-              </div>
-              <img
-                src={voxa}
-                alt="Voxa Screenshot"
-                className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
-              />
-            </div>
-          </div>
-
-          {/* Portfolio – Blue */}
-          <div className="flex flex-col items-center mt-10 px-4">
-            <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-sky-500 hover:bg-gradient-to-br hover:from-sky-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-              <div className="text-center sm:text-left text-white flex-1">
-                <h2 className="text-2xl sm:text-xl font-semibold mb-2">
-                  aayanpathan.com
-                </h2>
-                <p className="text-gray-300 text-md sm:text-sm">
-                  Yes, this website is also a project, and you're viewing it
-                  right now! Built with React + TypeScript with TailwindCSS.
-                  Currently in development.
-                </p>
-                <a
-                  href="http://www.aayanpathan.com"
-                  className="text-sky-400 hover:underline"
-                  target="_blank"
-                >
-                  View Website
-                </a>
-              </div>
-              <img
-                src={AayanWeb}
-                alt="Portfolio Screenshot"
-                className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
-              />
-            </div>
-          </div>
-        </div>
-        <h2 className="text-3xl md:text-4xl font-bold mt-10">Technologies</h2>
-        <Marquee autoFill className="gap-8 px-2">
-          {techs.map(({ src, url }, i) => {
-            const isExpressOrNext = src === EXPRESS || src === NEXT;
-            return (
-              <a
-                key={i}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer"
-              >
+            <div className="flex flex-col items-center px-4">
+              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-rose-500 hover:bg-gradient-to-br hover:from-rose-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+                <div className="text-center sm:text-left text-white flex-1">
+                  <h3 className="subtitle">FormulaMetric</h3>
+                  <p className="text-gray-300 text-sm sm:text-base">
+                    An intelligent F1 performance analytics tool built using
+                    MySQL-ERN stack and advanced statistical models. In
+                    Progress...
+                  </p>
+                </div>
                 <img
-                  src={src}
-                  alt=""
-                  className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${
-                    isExpressOrNext
-                      ? "filter invert brightness-40 hover:brightness-200"
-                      : "grayscale opacity-80 hover:grayscale-0"
-                  }`}
+                  src={FMImg}
+                  alt="FormulaMetric Screenshot"
+                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
                 />
-              </a>
-            );
-          })}
-        </Marquee>
-
-        <section
-          id="academics"
-          className="w-full px-4 sm:px-8 md:px-16 max-w-7xl mx-auto py-20"
-        >
-          <h2 className="text-center text-3xl md:text-4xl font-bold mb-12 text-white">
-            Academics
-          </h2>
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* GCSEs */}
-            <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/20">
-              <h3 className="text-xl font-semibold text-center text-white mb-4">
-                GCSEs
-              </h3>
-              <p className="text-white/80 text-center mb-2">
-                <strong>School:</strong> GEMS Founders School — Al Barsha
-              </p>
-              <p className="text-white/70 text-center mb-6 text-sm leading-relaxed">
-                <strong className="text-white">Subjects:</strong> Mathematics,
-                Computer Science, Chemistry, Psychology, Physics, Business,
-                English Literature, English Language, Further Pure Mathematics.
-              </p>
-              <div className="flex justify-center">
-                <span className="inline-block text-cyan-400 border border-cyan-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-cyan-400 hover:text-black transition-colors duration-300">
-                  Grades: 999988877
-                </span>
               </div>
             </div>
 
-            {/* A-Levels */}
-            <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-emerald-500/20 flex flex-col justify-between">
-              <div>
-                <h3 className="text-xl font-semibold text-center text-white mb-4">
-                  A-Levels
-                </h3>
-                <p className="text-white/80 text-center mb-2">
+            <div className="flex flex-col items-center px-4">
+              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-emerald-400 hover:bg-gradient-to-br hover:from-emerald-400/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+                <div className="text-center sm:text-left text-white flex-1">
+                  <h3 className="subtitle">Voxa Voice App</h3>
+                  <p className="text-gray-300 text-sm sm:text-base">
+                    Voxa is an AI-powered public speaking coach with real-time
+                    transcription, instant feedback, and a supportive community.
+                  </p>
+                  <a
+                    href="https://voxa.club"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:underline"
+                  >
+                    View Website
+                  </a>
+                </div>
+                <img
+                  src={voxa}
+                  alt="Voxa Screenshot"
+                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center px-4">
+              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-sky-500 hover:bg-gradient-to-br hover:from-sky-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+                <div className="text-center sm:text-left text-white flex-1">
+                  <h3 className="subtitle">aayanpathan.com</h3>
+                  <p className="text-gray-300 text-sm sm:text-base">
+                    This site is built with React + TypeScript + TailwindCSS.
+                    Currently in development.
+                  </p>
+                  <a
+                    href="http://www.aayanpathan.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-400 hover:underline"
+                  >
+                    View Website
+                  </a>
+                </div>
+                <img
+                  src={AayanWeb}
+                  alt="Portfolio Screenshot"
+                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section section-pad">
+          <div className="section-stack">
+            <h2 className="section-title">Technologies</h2>
+            <Marquee autoFill className="gap-8 px-2">
+              {techs.map(({ src, url }, i) => {
+                const isExpressOrNext = src === EXPRESS || src === NEXT;
+                return (
+                  <a
+                    key={i}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src={src}
+                      alt=""
+                      className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${
+                        isExpressOrNext
+                          ? "filter invert brightness-40 hover:brightness-200"
+                          : "grayscale opacity-80 hover:grayscale-0"
+                      }`}
+                    />
+                  </a>
+                );
+              })}
+            </Marquee>
+          </div>
+        </section>
+
+        <section id="academics" className="section section-pad">
+          <div className="section-stack">
+            <h2 className="section-title">Academics</h2>
+            <div className="flex flex-col lg:flex-row gap-8">
+              <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/20">
+                <h3 className="subtitle">GCSEs</h3>
+                <p className="text-white/80 text-center">
+                  {" "}
                   <strong>School:</strong> GEMS Founders School — Al Barsha
                 </p>
-                <p className="text-white/70 text-center mb-6 text-sm leading-relaxed">
+                <p className="text-white/70 text-center text-sm leading-relaxed">
                   <strong className="text-white">Subjects:</strong> Mathematics,
-                  Further Mathematics, Physics, Computer Science.
+                  Computer Science, Chemistry, Psychology, Physics, Business,
+                  English Literature, English Language, Further Pure
+                  Mathematics.
                 </p>
+                <div className="flex justify-center pt-4">
+                  <span className="inline-block text-cyan-400 border border-cyan-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-cyan-400 hover:text-black transition-colors duration-300">
+                    Grades: 999988877
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-center">
-                <span className="inline-block text-emerald-400 border border-emerald-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-emerald-400 hover:text-black transition-colors duration-300">
-                  A* in A-Level Math, A in AS-Level Physics, predicted A* in Physics and CS
-                </span>
+
+              <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-emerald-500/20 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <h3 className="subtitle">A-Levels</h3>
+                  <p className="text-white/80 text-center">
+                    <strong>School:</strong> GEMS Founders School — Al Barsha
+                  </p>
+                  <p className="text-white/70 text-center text-sm leading-relaxed">
+                    <strong className="text-white">Subjects:</strong>{" "}
+                    Mathematics, Further Mathematics, Physics, Computer Science.
+                  </p>
+                </div>
+                <div className="flex justify-center pt-4">
+                  <span className="inline-block text-emerald-400 border border-emerald-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-emerald-400 hover:text-black transition-colors duration-300">
+                    A* in A-Level Math, A in AS-Level Physics, predicted A* in
+                    Physics and CS
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <h2 className="text-3xl md:text-4xl font-bold mt-10">Contact Me</h2>
-        <ContactForm />
+        <section className="section section-pad">
+          <div className="section-stack">
+            <h2 className="section-title">Contact Me</h2>
+            <ContactForm />
+          </div>
+        </section>
       </div>
       <footer className="w-full h-50 gap-7 flex flex-col">
         <h3 className="text-3xl md:text-4xl font-bold mt-2">

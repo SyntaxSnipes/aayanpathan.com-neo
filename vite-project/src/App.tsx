@@ -245,24 +245,22 @@ function MainContent() {
   ];
 
   return (
-    <section className="relative w-screen min-h-screen overflow-x-hidden text-white">
+    <section className="relative w-screen min-h-[100dvh] overflow-x-clip text-white">
       <div
         ref={vantaRef}
-        className="absolute inset-0 z-0 opacity-30 pointer-events-none backdrop-blur-md"
+        className="absolute inset-0 z-0 opacity-30 pointer-events-none"
       />
 
       <div className="relative z-10 section section-pad section-stack">
-        <div className="relative z-10 section section-pad section-stack">
-          <h2 className="section-title">About Me</h2>
-          <p className="text-sm md:text-xl sm:text-lg text-gray-300 max-w-xl px-16 xl:px-0">
-            I'm Mohammed Aayan Pathan. I am 17 years old, and I am from India
-            though currently residing and studying in the UAE. I have been
-            fascinated by technology since I was a toddler, and ever since, I've
-            been on a journey to understand and leverage technology for
-            practically everything! I am currently in Year 13, on my last year
-            of the A-Level course in GEMS Founders School Al Barsha.
-          </p>
-        </div>
+        <h2 className="section-title">About Me</h2>
+        <p className="text-sm md:text-xl sm:text-lg text-gray-300 max-w-xl px-16 xl:px-0">
+          I'm Mohammed Aayan Pathan. I am 17 years old, and I am from India
+          though currently residing and studying in the UAE. I have been
+          fascinated by technology since I was a toddler, and ever since, I've
+          been on a journey to understand and leverage technology for
+          practically everything! I am currently in Year 13, on my last year of
+          the A-Level course in GEMS Founders School Al Barsha.
+        </p>
 
         <section id="experience" className="section section-pad">
           <div className="section-stack">
@@ -417,7 +415,7 @@ function MainContent() {
           </div>
 
           {/* Full-bleed marquee (escapes the centered container) */}
-          <div className="relative w-screen max-w-[100vw] left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden">
+          <div className="relative w-screen max-w-[100vw] left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden isolate">
             {/* Edge fades to page background (#080809) */}
             <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-32 z-20 bg-gradient-to-r from-[#080809] to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 z-20 bg-gradient-to-l from-[#080809] to-transparent" />

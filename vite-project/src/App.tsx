@@ -160,6 +160,7 @@ const Header: React.FC = () => {
       window.requestIdleCallback?.(init) ?? window.setTimeout(init, 0);
 
     return () => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       window.cancelIdleCallback
         ? window.cancelIdleCallback(idleId)
         : window.clearTimeout(idleId);
@@ -245,7 +246,7 @@ function MainContent() {
   ];
 
   return (
-    <section className="relative w-screen min-h-[100dvh] overflow-x-clip text-white">
+    <section className="relative w-screen min-h-fit overflow-x-clip text-white">
       <div
         ref={vantaRef}
         className="absolute inset-0 z-0 opacity-30 pointer-events-none"
@@ -341,7 +342,7 @@ function MainContent() {
 
             <div className="flex flex-col items-center px-4">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-rose-500 hover:bg-gradient-to-br hover:from-rose-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-                <div className="text-center sm:text-left text-white flex-1">
+                <div className="text-left sm:text-left text-white flex-1">
                   <h3 className="subtitle">FormulaMetric</h3>
                   <p className="text-gray-300 text-sm sm:text-base">
                     An intelligent F1 performance analytics tool built using
@@ -499,27 +500,27 @@ function MainContent() {
           </div>
         </section>
       </div>
-      <footer className="w-full h-50 gap-7 flex flex-col">
-        <h3 className="text-3xl md:text-4xl font-bold mt-2">
+      <footer className="w-full h-50 gap-7 flex flex-col py-10">
+        <h3 className="text-3xl md:text-4xl font-bold mt-2 z-1">
           My CV and Platforms
         </h3>
-        <span className="flex flex-row gap-10 items-center justify-center">
+        <span className="flex flex-row gap-10 items-center justify-center z-1">
           <a
-            className="hover:underline text-cyan-400"
+            className="hover:underline text-cyan-400 z-1"
             target="_blank"
             href="https://www.linkedin.com/in/mohammed-aayan-pathan/"
           >
             LinkedIn Profile
           </a>
           <a
-            className="hover:underline text-cyan-400"
+            className="hover:underline text-cyan-400 z-1"
             target="_blank"
             href="../mycv.pdf"
           >
             CV
           </a>
           <a
-            className="hover:underline text-cyan-400"
+            className="hover:underline text-cyan-400 z-1"
             target="_blank"
             href="https://github.com/SyntaxSnipes"
           >

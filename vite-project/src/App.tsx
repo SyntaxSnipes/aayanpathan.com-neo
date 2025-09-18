@@ -75,7 +75,7 @@ function ContactForm() {
       ref={form}
       onSubmit={sendEmail}
       className="
-        max-w-2xl mx-6
+        max-w-2xl
         bg-white/10 backdrop-blur-md
         border border-white/20
         rounded-2xl
@@ -254,7 +254,7 @@ function MainContent() {
 
       <div className="relative z-10 section section-pad section-stack">
         <h2 className="section-title">About Me</h2>
-        <p className="text-sm md:text-xl sm:text-lg text-gray-300 max-w-xl px-16 xl:px-0">
+        <p className="text-md md:text-xl sm:text-lg text-gray-300 max-w-xl px-6 sm:px:6 lg:px-16 xl:px-0">
           I'm Mohammed Aayan Pathan. I am 17 years old, and I am from India
           though currently residing and studying in the UAE. I have been
           fascinated by technology since I was a toddler, and ever since, I've
@@ -340,10 +340,10 @@ function MainContent() {
           <div className="section-stack">
             <h2 className="section-title">My Projects</h2>
 
-            <div className="flex flex-col items-center px-4">
+            <div className="flex flex-col items-center">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-rose-500 hover:bg-gradient-to-br hover:from-rose-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
                 <div className="text-left sm:text-left text-white flex-1">
-                  <h3 className="subtitle">FormulaMetric</h3>
+                  <h3 className="subtitle text-center lg:text-left">FormulaMetric</h3>
                   <p className="text-gray-300 text-sm sm:text-base">
                     An intelligent F1 performance analytics tool built using
                     MySQL-ERN stack and advanced statistical models. In
@@ -358,7 +358,7 @@ function MainContent() {
               </div>
             </div>
 
-            <div className="flex flex-col items-center px-4">
+            <div className="flex flex-col items-center">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-emerald-400 hover:bg-gradient-to-br hover:from-emerald-400/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">Voxa Voice App</h3>
@@ -383,7 +383,7 @@ function MainContent() {
               </div>
             </div>
 
-            <div className="flex flex-col items-center px-4">
+            <div className="flex flex-col items-center">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-sky-500 hover:bg-gradient-to-br hover:from-sky-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">aayanpathan.com</h3>
@@ -411,7 +411,7 @@ function MainContent() {
         </section>
 
         <section className="section section-pad">
-          <div className="section-stack">
+          <div className="section-stack my-2">
             <h2 className="section-title">Technologies</h2>
           </div>
 
@@ -484,8 +484,7 @@ function MainContent() {
                 </p>
                 <div className="flex justify-center">
                   <span className="inline-block text-emerald-400 border border-emerald-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-emerald-400 hover:text-black transition-colors duration-300">
-                    A* in A-Level Math, A in AS-Level Physics, predicted A* in
-                    Physics and CS
+                    A* in Math, A in AS Physics, Predicted A* in Further Math, Physics and CS
                   </span>
                 </div>
               </div>

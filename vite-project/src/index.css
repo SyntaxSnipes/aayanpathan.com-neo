@@ -10,6 +10,15 @@ html, body {
   overflow-x: hidden;
 }
 
+html, body {
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   box-sizing: border-box;
 }

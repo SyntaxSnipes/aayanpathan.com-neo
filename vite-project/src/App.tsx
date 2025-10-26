@@ -289,7 +289,7 @@ function MainContent() {
                     className="w-10 h-10 rounded-md bg-[#a7f3d0]/10 p-1 border border-[#34d399]/30 shrink-0"
                   />
                   <h3 className="subtitle">
-                    Junior Engineering Associate{" "}
+                    Full-Stack Web Developer{" "}
                     <span className="text-white/70">• Voxa</span>
                   </h3>
                 </div>

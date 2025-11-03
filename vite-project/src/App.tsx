@@ -182,12 +182,11 @@ const Header: React.FC = () => {
           <Typewriter
             words={[
               "Crafting intelligent, efficient, cohesive code",
-              "Full-Stack Web Developer",
               "Junior Engineering Associate (Full-Stack) @ Voxa",
               "Infusing Artificial Intelligence with user-ended applications",
               "MySQL-ERN technology stack",
               "Next.js and Tailwind Expertise",
-              "International CS Competition Pre-Finalist (w/ honors)"
+              "International CS Competition Finalist (w/ honors)"
             ]}
             loop={0}
             cursor
@@ -397,8 +396,8 @@ function MainContent() {
 
             <div className="flex flex-col items-center">
               <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-rose-500 hover:bg-gradient-to-br hover:from-rose-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-                <div className="text-left sm:text-left text-white flex-1">
-                  <h3 className="subtitle text-center lg:text-left">
+                <div className="text-center sm:text-left text-white flex-1">
+                  <h3 className="subtitle">
                     FormulaMetric
                   </h3>
                   <p className="text-gray-300 text-sm sm:text-base">
@@ -492,11 +491,10 @@ function MainContent() {
                     <img
                       src={src}
                       alt=""
-                      className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${
-                        isExpressOrNext
+                      className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${isExpressOrNext
                           ? "filter invert brightness-40 hover:brightness-200"
                           : "grayscale opacity-80 hover:grayscale-0"
-                      }`}
+                        }`}
                     />
                   </a>
                 );
@@ -573,7 +571,7 @@ function MainContent() {
           <a
             className="hover:underline text-cyan-400 z-1"
             target="_blank"
-            href="../Aayan_CV_October25.pdf"
+            href="../Aayan_CV_November.pdf"
           >
             CV
           </a>

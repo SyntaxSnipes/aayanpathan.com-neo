@@ -186,7 +186,7 @@ const Header: React.FC = () => {
               "Infusing Artificial Intelligence with user-ended applications",
               "MySQL-ERN technology stack",
               "Next.js and Tailwind Expertise",
-              "International CS Competition Finalist (w/ honors)"
+              "International CS Competition Bronze Honor Finalist (top 8% internationally)"
             ]}
             loop={0}
             cursor
@@ -571,7 +571,7 @@ function MainContent() {
           <a
             className="hover:underline text-cyan-400 z-1"
             target="_blank"
-            href="../Aayan_CV_November16.pdf"
+            href="../Aayan_CV_November24.pdf"
           >
             CV
           </a>

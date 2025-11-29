@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Typewriter } from "react-simple-typewriter";
 import FMImg from "./assets/FM.png";
-import voxa from "./assets/voxa.png";
+import voxa from "./assets/voxatextlogo.svg";
 import Marquee from "react-fast-marquee";
 import AayanWeb from "./assets/aayanweb.png";
 import CSS from "./assets/tech-stack-icons/CSSLogo.svg";
@@ -26,6 +26,68 @@ declare global {
     VANTA: any;
   }
 }
+
+// Optimized Vanta NET Hook
+function useVantaNet(ref: React.RefObject<HTMLDivElement | null>) {
+  const effectRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!ref.current || effectRef.current) return;
+    if (window.VANTA) {
+      effectRef.current = window.VANTA.NET({
+        el: ref.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: true,
+        minHeight: window.innerHeight,
+        minWidth: window.innerWidth,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0xffffff,
+        backgroundColor: 0x080809,
+        points: window.innerWidth < 640 ? 8 : 16,
+        maxDistance: window.innerWidth < 640 ? 12 : 20,
+        spacing: 20.0,
+      });
+
+    }
+
+    return () => {
+      effectRef.current?.destroy();
+      effectRef.current = null;
+    };
+  }, [ref]);
+}
+
+function useVantaWaves(ref: React.RefObject<HTMLDivElement | null>) {
+  const effectRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (ref.current && window.VANTA) {
+      effectRef.current = window.VANTA.WAVES({
+        el: ref.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200,
+        minWidth: 200,
+        color: 0x000,
+        shininess: 12,
+        waveHeight: 13,
+        waveSpeed: 0.7,
+        zoom: 0.7,
+        opacity: 0.4,
+      });
+
+    }
+
+    return () => {
+      effectRef.current?.destroy();
+      effectRef.current = null;
+    };
+  }, [ref]);
+}
+
 
 function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
@@ -131,49 +193,10 @@ function ContactForm() {
 }
 
 const Header: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const effectRef = useRef<any>(null);
-
-  useEffect(() => {
-    const init = () => {
-      if (window.VANTA && containerRef.current) {
-        effectRef.current = window.VANTA.NET({
-          el: containerRef.current,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: true,
-          minHeight: window.innerHeight,
-          minWidth: window.innerWidth,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0xffffff,
-          backgroundColor: 0x080809,
-          points: window.innerWidth < 640 ? 8 : 16,
-          maxDistance: window.innerWidth < 640 ? 12 : 20,
-          spacing: 20.0,
-        });
-      }
-    };
-
-    // init Vanta when browser is idle (or immediately)
-    const idleId =
-      window.requestIdleCallback?.(init) ?? window.setTimeout(init, 0);
-
-    return () => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      window.cancelIdleCallback
-        ? window.cancelIdleCallback(idleId)
-        : window.clearTimeout(idleId);
-      effectRef.current?.destroy();
-    };
-  }, []);
-
+  const ref = useRef<HTMLDivElement>(null);
+  useVantaNet(ref);
   return (
-    <div className="relative w-screen min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Vanta canvas behind everything */}
-      <div ref={containerRef} className="absolute inset-0 z-0 opacity-25" />
-
-      {/* Foreground content */}
+    <div ref={ref} className="relative w-screen min-h-screen flex items-center justify-center overflow-hidden">
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <h1 className="text-5xl md:text-6xl lg:text-8xl font-heading font-bold text-white">
           Mohammed Aayan Pathan
@@ -186,7 +209,7 @@ const Header: React.FC = () => {
               "Infusing Artificial Intelligence with user-ended applications",
               "MySQL-ERN technology stack",
               "Next.js and Tailwind Expertise",
-              "International CS Competition Bronze Honor Finalist (top 8% internationally)"
+              "International CS Competition Bronze Honor Finalist (top 8% internationally)",
             ]}
             loop={0}
             cursor
@@ -197,41 +220,14 @@ const Header: React.FC = () => {
         </p>
       </div>
     </div>
+
   );
 };
 
+
 function MainContent() {
-  const vantaRef = useRef<HTMLDivElement>(null);
-  const [vantaEffect, setVantaEffect] = useState<any>(null);
-
-  useEffect(() => {
-    const setupVanta = () => {
-      if (!vantaEffect && window.VANTA?.TOPOLOGY && vantaRef.current) {
-        setVantaEffect(
-          window.VANTA.TOPOLOGY({
-            el: vantaRef.current,
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.0,
-            minWidth: 200.0,
-            scale: 1.0,
-            scaleMobile: 1.0,
-            color: 0xffffff,
-            backgroundColor: 0x080809,
-          })
-        );
-      }
-    };
-
-    // Delay initialization to ensure layout is stable
-    const timeout = setTimeout(setupVanta, 500);
-
-    return () => {
-      clearTimeout(timeout);
-      if (vantaEffect) vantaEffect.destroy();
-    };
-  }, [vantaEffect]);
+  const ref = useRef<HTMLDivElement>(null);
+  useVantaWaves(ref);
   const techs = [
     { src: REACT, url: "https://reactjs.org" },
     { src: JS, url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
@@ -248,12 +244,7 @@ function MainContent() {
   ];
 
   return (
-    <section className="relative w-screen min-h-fit overflow-x-clip text-white">
-      <div
-        ref={vantaRef}
-        className="absolute inset-0 z-0 opacity-30 pointer-events-none"
-      />
-
+    <section ref={ref} className="relative w-screen min-h-screen overflow-x-clip text-white">
       <div className="relative z-10 section section-pad section-stack">
         <h2 className="section-title">About Me</h2>
         <p className="text-md md:text-xl sm:text-lg text-gray-300 max-w-xl px-6 sm:px:6 lg:px-16 xl:px-0">
@@ -277,7 +268,7 @@ function MainContent() {
     bg-white/10 backdrop-blur-md
     p-6 sm:p-8 text-left
     shadow-md transition-all duration-300
-    group hover:shadow-lg hover:shadow-[#34d399]/20 hover:border-[#34d399]/20
+    group hover:shadow-lg hover:shadow-[#b592ff]/20 hover:border-[#b592ff]/20
   "
             >
               <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -285,7 +276,7 @@ function MainContent() {
                   <img
                     src={voxa}
                     alt="Voxa logo"
-                    className="w-10 h-10 rounded-md bg-[#a7f3d0]/10 p-1 border border-[#34d399]/30 shrink-0"
+                    className="w-20 h-10 rounded-md bg-[#b592ff]/10 p-1 border border-[#b592ff]/30 shrink-0"
                   />
                   <h3 className="subtitle">
                     Full-Stack Web Developer{" "}
@@ -301,7 +292,7 @@ function MainContent() {
                     href="https://voxa.club"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm sm:text-base text-[#34d399] hover:underline"
+                    className="text-sm sm:text-base text-[#b592ff] hover:underline"
                   >
                     Visit →
                   </a>
@@ -309,7 +300,7 @@ function MainContent() {
               </header>
               <div className="mt-6 relative pl-8">
                 {/* vertical line */}
-                <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#34d399] via-white/20 to-transparent rounded-full" />
+                <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#b592ff] via-white/20 to-transparent rounded-full" />
 
                 <div className="space-y-8">
                   <div>
@@ -317,7 +308,7 @@ function MainContent() {
                       <h4 className="text-xl md:text-2xl font-bold text-white">
                         Junior Engineering Associate
                       </h4>
-                      <span className="px-2 xl:py-0.5 sm:py-0 text-xs font-semibold rounded-full bg-[#34d399]/15 text-[#34d399] border border-[#34d399]/40">
+                      <span className="px-2 xl:py-0.5 sm:py-0 text-xs font-semibold rounded-full bg-[#b592ff]/15 text-[#b592ff] border border-[#b592ff]/40">
                         Current
                       </span>
                     </div>
@@ -357,7 +348,7 @@ function MainContent() {
                   className="
   bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
-  hover:bg-[#34d399]/10 hover:border-[#34d399]/40 hover:shadow-md hover:shadow-[#34d399]/20
+  hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
 "
                 >
@@ -368,7 +359,7 @@ function MainContent() {
                   className="
   bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
-  hover:bg-[#34d399]/10 hover:border-[#34d399]/40 hover:shadow-md hover:shadow-[#34d399]/20
+  hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
 "
                 >
@@ -379,7 +370,7 @@ function MainContent() {
                   className="
   bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
-  hover:bg-[#34d399]/10 hover:border-[#34d399]/40 hover:shadow-md hover:shadow-[#34d399]/20
+  hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
 "
                 >
@@ -415,7 +406,7 @@ function MainContent() {
             </div>
 
             <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-emerald-400 hover:bg-gradient-to-br hover:from-emerald-400/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-[#b592ff] hover:bg-gradient-to-br hover:from-purple-400/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">Voxa Voice App</h3>
                   <p className="text-gray-300 text-sm sm:text-base">
@@ -426,7 +417,7 @@ function MainContent() {
                     href="https://voxa.club"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-emerald-400 hover:underline"
+                    className="text-[#b592ff] hover:underline"
                   >
                     View Website
                   </a>
@@ -491,9 +482,10 @@ function MainContent() {
                     <img
                       src={src}
                       alt=""
+                      loading="lazy"
                       className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${isExpressOrNext
-                          ? "filter invert brightness-40 hover:brightness-200"
-                          : "grayscale opacity-80 hover:grayscale-0"
+                        ? "filter invert brightness-40 hover:brightness-200"
+                        : "grayscale opacity-80 hover:grayscale-0"
                         }`}
                     />
                   </a>

@@ -563,7 +563,7 @@ function MainContent() {
           <a
             className="hover:underline text-cyan-400 z-1"
             target="_blank"
-            href="../Aayan_CV_November24.pdf"
+            href="../Aayan_CV_March15.pdf"
           >
             CV
           </a>

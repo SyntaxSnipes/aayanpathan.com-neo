@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { SyncLoader } from "react-spinners";
 import { Typewriter } from "react-simple-typewriter";
 import FMImg from "./assets/FM.png";
 import voxa from "./assets/voxatextlogo.svg";
 import Marquee from "react-fast-marquee";
 import AayanWeb from "./assets/aayanweb.png";
+import tlsearch from "./assets/tlsearch.png";
 import CSS from "./assets/tech-stack-icons/CSSLogo.svg";
 import MySQL from "./assets/tech-stack-icons/MySQLLogo.svg";
 import HTML5 from "./assets/tech-stack-icons/HTML5Logo.svg";
@@ -44,7 +45,7 @@ function useVantaNet(ref: React.RefObject<HTMLDivElement | null>) {
         scale: 1.0,
         scaleMobile: 1.0,
         color: 0xffffff,
-        backgroundColor: 0x080809,
+        backgroundColor: 0x0f0f17,
         points: window.innerWidth < 640 ? 8 : 16,
         maxDistance: window.innerWidth < 640 ? 12 : 20,
         spacing: 20.0,
@@ -59,37 +60,8 @@ function useVantaNet(ref: React.RefObject<HTMLDivElement | null>) {
   }, [ref]);
 }
 
-function useVantaWaves(ref: React.RefObject<HTMLDivElement | null>) {
-  const effectRef = useRef<any>(null);
 
-  useEffect(() => {
-    if (ref.current && window.VANTA) {
-      effectRef.current = window.VANTA.WAVES({
-        el: ref.current,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200,
-        minWidth: 200,
-        color: 0x000,
-        shininess: 12,
-        waveHeight: 13,
-        waveSpeed: 0.7,
-        zoom: 0.7,
-        opacity: 0.4,
-      });
-
-    }
-
-    return () => {
-      effectRef.current?.destroy();
-      effectRef.current = null;
-    };
-  }, [ref]);
-}
-
-
-function ContactForm() {
+const ContactForm = memo(function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
@@ -138,27 +110,26 @@ function ContactForm() {
       onSubmit={sendEmail}
       className="
         max-w-2xl
-        bg-white/10 backdrop-blur-md
+        bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-xl
         border border-white/20
-        rounded-2xl
-        shadow-lg
-        p-6 space-y-5
-
-        /* 🚀 stronger hover glow */
-        transition-shadow duration-300
-        hover:shadow-cyan-400/40 hover:shadow-xl
+        rounded-3xl
+        shadow-2xl
+        p-8 space-y-6
+        transition-all duration-500
+        hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-white/40
       "
     >
       <h2 className="text-2xl font-semibold text-white text-center">
-        Send me an email
+        Let's Connect
       </h2>
+      <p className="text-gray-300 text-center text-sm">I'd love to hear from you. Send me a message!</p>
 
       <input
         type="text"
         name="user_name"
         placeholder="Your Name"
         required
-        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"
       />
 
       <input
@@ -166,7 +137,7 @@ function ContactForm() {
         name="user_email"
         placeholder="Your Email"
         required
-        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"
       />
 
       <textarea
@@ -174,25 +145,25 @@ function ContactForm() {
         placeholder="Your Message"
         rows={5}
         required
-        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30 resize-none"
       />
 
       <button
         type="submit"
         className="
-          w-full bg-cyan-500
-          text-white font-semibold py-3 rounded-lg
-          transition transform duration-300
-          hover:scale-101 hover:shadow-lg hover:shadow-cyan-500/50
+          w-full bg-gradient-to-r from-cyan-500 to-blue-500
+          text-white font-bold py-3 rounded-xl
+          active:scale-95
+          tracking-wide text-sm
         "
       >
         Send Message
       </button>
     </form>
   );
-}
+});
 
-const Header: React.FC = () => {
+const Header = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   useVantaNet(ref);
   return (
@@ -222,12 +193,10 @@ const Header: React.FC = () => {
     </div>
 
   );
-};
+});
 
 
-function MainContent() {
-  const ref = useRef<HTMLDivElement>(null);
-  useVantaWaves(ref);
+const MainContent = memo(function MainContent() {
   const techs = [
     { src: REACT, url: "https://reactjs.org" },
     { src: JS, url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
@@ -244,15 +213,15 @@ function MainContent() {
   ];
 
   return (
-    <section ref={ref} className="relative w-screen min-h-screen overflow-x-clip text-white">
+    <section className="relative w-screen min-h-screen overflow-x-clip text-white">
       <div className="relative z-10 section section-pad section-stack">
-        <h2 className="section-title">About Me</h2>
-        <p className="text-md md:text-xl sm:text-lg text-gray-300 max-w-xl px-6 sm:px:6 lg:px-16 xl:px-0">
+        <h2 className="section-title relative z-20">About Me</h2>
+        <p className="text-md md:text-xl sm:text-lg text-gray-200 max-w-xl px-6 sm:px:6 lg:px-16 xl:px-0 leading-relaxed relative z-20">
           I'm Mohammed Aayan Pathan. I'm 17 years old and I'm from India, though I reside, study and work in the UAE. I've been
           fascinated by the technical ingenunity and capabilities of technology since a young age, and ever since, I've
           been on a journey to understand and leverage technology for
           practically everything! I am currently in Year 13, on my last year of
-          the A-Level course in GEMS Founders School Al Barsha, and will be applying for a Bachelor's in CS at university.
+          the A-Level course in GEMS Founders School Al Barsha, and will be applying for a BSc in Computer Science at university.
           <br />
           <br />
           I am a full-stack web developer, specializing in Next.js and Tailwind. I'm flexible with SQL approaches such as MySQL or No-SQL approaches like Firebase. I place heavy priority on clean and user-oriented UIs. I believe form is function. I'm also proficient in Python, and have experience working with backends in Python, though I typically work with MySQL-ERN or Next.js routes.
@@ -265,7 +234,7 @@ function MainContent() {
               className="
     max-w-4xl mx-auto mt-6
     rounded-2xl border border-white/20
-    bg-white/10 backdrop-blur-md
+    bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-md
     p-6 sm:p-8 text-left
     shadow-md transition-all duration-300
     group hover:shadow-lg hover:shadow-[#b592ff]/20 hover:border-[#b592ff]/20
@@ -274,6 +243,7 @@ function MainContent() {
               <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center justify-center gap-3">
                   <img
+                    loading="lazy"
                     src={voxa}
                     alt="Voxa logo"
                     className="w-20 h-10 rounded-md bg-[#b592ff]/10 p-1 border border-[#b592ff]/30 shrink-0"
@@ -346,7 +316,7 @@ function MainContent() {
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div
                   className="
-  bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
+  bg-gradient-to-br from-zinc-900/65 via-neutral-900/50 to-black/35 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
   hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
@@ -357,7 +327,7 @@ function MainContent() {
                 </div>
                 <div
                   className="
-  bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
+  bg-gradient-to-br from-zinc-900/65 via-neutral-900/50 to-black/35 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
   hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
@@ -368,7 +338,7 @@ function MainContent() {
                 </div>
                 <div
                   className="
-  bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
+  bg-gradient-to-br from-zinc-900/65 via-neutral-900/50 to-black/35 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
   hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
@@ -382,22 +352,45 @@ function MainContent() {
         </section>
 
         <section className="section section-pad">
+
           <div className="section-stack">
             <h2 className="section-title">My Projects</h2>
-
             <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-rose-500 hover:bg-gradient-to-br hover:from-rose-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+              <div className="w-full max-w-4xl bg-gradient-to-br from-yellow-500/5 via-white/5 to-transparent backdrop-blur-md border border-yellow-400/30 hover:border-yellow-400/60 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+                <div className="text-center sm:text-left text-white flex-1">
+                  <h3 className="subtitle">TLSearch</h3>
+                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+                    A semantic search engine for NASA Space Apps Challenge built with Next.js and FastAPI, using vector embeddings to query space biology research papers with AI-generated summaries.
+                  </p>
+                  <a
+                    href="https://tlsearch.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#f8ff48] hover:underline"
+                  >
+                    View Website
+                  </a>
+                </div>
+                <img
+                  loading="lazy"
+                  src={tlsearch}
+                  alt="TLSearch Screenshot"
+                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-full max-w-4xl bg-gradient-to-br from-rose-500/5 via-white/5 to-transparent backdrop-blur-md border border-rose-400/30 hover:border-rose-400/60 hover:shadow-lg hover:shadow-rose-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">
                     FormulaMetric
                   </h3>
-                  <p className="text-gray-300 text-sm sm:text-base">
-                    An intelligent F1 performance analytics tool built using
-                    MySQL-ERN stack and advanced statistical models. In
-                    Progress...
+                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+                    An intelligent F1 performance analytics tool built with MySQL, Express, React, and Node.js, featuring advanced statistical models for formula-level performance insights. In Progress...
                   </p>
                 </div>
                 <img
+                  loading="lazy"
                   src={FMImg}
                   alt="FormulaMetric Screenshot"
                   className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
@@ -406,12 +399,11 @@ function MainContent() {
             </div>
 
             <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-[#b592ff] hover:bg-gradient-to-br hover:from-purple-400/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+              <div className="w-full max-w-4xl bg-gradient-to-br from-purple-500/5 via-white/5 to-transparent backdrop-blur-md border border-purple-400/30 hover:border-purple-400/60 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">Voxa Voice App</h3>
-                  <p className="text-gray-300 text-sm sm:text-base">
-                    Voxa is an AI-powered public speaking coach with real-time
-                    transcription, instant feedback, and a supportive community.
+                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+                    Voxa is an AI-powered public speaking coach built with Next.js, TypeScript, Firebase, and Supabase, featuring real-time transcription, instant feedback, and a supportive community.
                   </p>
                   <a
                     href="https://voxa.club"
@@ -423,6 +415,7 @@ function MainContent() {
                   </a>
                 </div>
                 <img
+                  loading="lazy"
                   src={voxa}
                   alt="Voxa Screenshot"
                   className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
@@ -431,12 +424,11 @@ function MainContent() {
             </div>
 
             <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-sky-500 hover:bg-gradient-to-br hover:from-sky-500/10 hover:to-white/5 transition-all duration-300 ease-in-out rounded-2xl shadow-xl flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
+              <div className="w-full max-w-4xl bg-gradient-to-br from-cyan-500/5 via-white/5 to-transparent backdrop-blur-md border border-cyan-400/30 hover:border-cyan-400/60 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">aayanpathan.com</h3>
-                  <p className="text-gray-300 text-sm sm:text-base">
-                    This site is built with React + TypeScript + TailwindCSS.
-                    Currently in development.
+                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+                    My personal portfolio and blog, built with Vite, React, TypeScript, and Tailwind CSS with interactive Vanta.js animations.
                   </p>
                   <a
                     href="http://www.aayanpathan.com"
@@ -448,6 +440,7 @@ function MainContent() {
                   </a>
                 </div>
                 <img
+                  loading="lazy"
                   src={AayanWeb}
                   alt="Portfolio Screenshot"
                   className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
@@ -464,9 +457,9 @@ function MainContent() {
 
           {/* Full-bleed marquee (escapes the centered container) */}
           <div className="relative w-screen max-w-[100vw] left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden isolate">
-            {/* Edge fades to page background (#080809) */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-32 z-20 bg-gradient-to-r from-[#080809] to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 z-20 bg-gradient-to-l from-[#080809] to-transparent" />
+            {/* Edge fades to page background (#0f0f17) */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-32 z-20 bg-gradient-to-r from-[#0f0f17] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 z-20 bg-gradient-to-l from-[#0f0f17] to-transparent" />
 
             <Marquee autoFill pauseOnHover speed={55} className="py-2">
               {techs.map(({ src, url }, i) => {
@@ -501,7 +494,7 @@ function MainContent() {
 
             <div className="flex flex-col lg:flex-row gap-8">
               {/* GCSEs */}
-              <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/20">
+              <div className="w-full lg:w-1/2 bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/20">
                 <h3 className="subtitle mb-4">GCSEs</h3>
                 <p className="text-white/80 text-center mb-2">
                   <strong>School:</strong> GEMS Founders School — Al Barsha
@@ -520,7 +513,7 @@ function MainContent() {
               </div>
 
               {/* A-Levels */}
-              <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-emerald-500/20 flex flex-col justify-between">
+              <div className="w-full lg:w-1/2 bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-emerald-500/20 flex flex-col justify-between">
                 <h3 className="subtitle mb-4">A-Levels</h3>
                 <p className="text-white/80 text-center mb-2">
                   <strong>School:</strong> GEMS Founders School — Al Barsha
@@ -531,7 +524,7 @@ function MainContent() {
                 </p>
                 <div className="flex justify-center">
                   <span className="inline-block text-emerald-400 border border-emerald-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-emerald-400 hover:text-black transition-colors duration-300">
-                    A* in Math, A in AS Physics, Predicted A* in Further Math,
+                    A* in Math, A in AS Physics and Further Math, Predicted A* in Further Math,
                     and A in Physics and CS
                   </span>
                 </div>
@@ -543,7 +536,7 @@ function MainContent() {
         <section className="section section-pad">
           <div className="section-stack">
             <h2 className="section-title">Contact Me</h2>
-            <p>Interested in contacting me? Let's build something together!</p>
+            <p className="text-gray-300 text-lg">Interested in contacting me? Let's build something together!</p>
             <ContactForm />
           </div>
         </section>
@@ -556,6 +549,7 @@ function MainContent() {
           <a
             className="hover:underline text-cyan-400 z-1"
             target="_blank"
+            rel="noopener noreferrer"
             href="https://www.linkedin.com/in/mohammed-aayan-pathan/"
           >
             LinkedIn Profile
@@ -563,6 +557,7 @@ function MainContent() {
           <a
             className="hover:underline text-cyan-400 z-1"
             target="_blank"
+            rel="noopener noreferrer"
             href="../Aayan_CV_March15.pdf"
           >
             CV
@@ -570,6 +565,7 @@ function MainContent() {
           <a
             className="hover:underline text-cyan-400 z-1"
             target="_blank"
+            rel="noopener noreferrer"
             href="https://github.com/SyntaxSnipes"
           >
             GitHub Profile
@@ -578,10 +574,10 @@ function MainContent() {
       </footer>
     </section>
   );
-}
+});
 
 const Loader: React.FC = () => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0f0f17]">
     <SyncLoader color="#ffffff" loading size={50} />
   </div>
 );

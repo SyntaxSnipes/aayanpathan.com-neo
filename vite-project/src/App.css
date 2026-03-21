@@ -42,10 +42,10 @@
 }
 .edge-fades::before {
   left: 0;
-  background: linear-gradient(to right, #080809, rgba(8,8,9,0));
+  background: linear-gradient(to right, #0f0f17, rgba(15,15,23,0));
 }
 .edge-fades::after {
   right: 0;
-  background: linear-gradient(to left, #080809, rgba(8,8,9,0));
+  background: linear-gradient(to left, #0f0f17, rgba(15,15,23,0));
 }
 

@@ -78,7 +78,7 @@ const ContactForm = memo(function ContactForm() {
         "cvuiRUMw64Soebb11"
       )
       .then(() => {
-        console.log("Message sent to me ✅");
+        console.log("Message sent to me");
 
         emailjs
           .send(

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, memo } from "react";
 import { SyncLoader } from "react-spinners";
 import { Typewriter } from "react-simple-typewriter";
-import FMImg from "./assets/FM.png";
+import FMImg from "./assets/FMss.png";
 import voxa from "./assets/voxatextlogo.svg";
 import Marquee from "react-fast-marquee";
 import AayanWeb from "./assets/aayanweb.png";
@@ -18,6 +18,8 @@ import EXPRESS from "./assets/tech-stack-icons/expresslogo.svg";
 import NEXT from "./assets/tech-stack-icons/Nextjs.svg";
 import TS from "./assets/tech-stack-icons/Typescript.svg";
 import FIREBASE from "./assets/tech-stack-icons/firebase.svg";
+import CPP from "./assets/tech-stack-icons/C++logo.svg";
+import SUPABASE from "./assets/tech-stack-icons/supabaselogo.svg";
 import emailjs from "@emailjs/browser";
 import "./index.css";
 import "./App.css";
@@ -59,7 +61,6 @@ function useVantaNet(ref: React.RefObject<HTMLDivElement | null>) {
     };
   }, [ref]);
 }
-
 
 const ContactForm = memo(function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
@@ -119,10 +120,6 @@ const ContactForm = memo(function ContactForm() {
         hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-white/40
       "
     >
-      <h2 className="text-2xl font-semibold text-white text-center">
-        Let's Connect
-      </h2>
-      <p className="text-gray-300 text-center text-sm">I'd love to hear from you. Send me a message!</p>
 
       <input
         type="text"
@@ -154,7 +151,7 @@ const ContactForm = memo(function ContactForm() {
           w-full bg-gradient-to-r from-cyan-500 to-blue-500
           text-white font-bold py-3 rounded-xl
           active:scale-95
-          tracking-wide text-sm
+          tracking-wide text-sm cursor-pointer
         "
       >
         Send Message
@@ -175,12 +172,13 @@ const Header = memo(() => {
         <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-xl">
           <Typewriter
             words={[
-              "Crafting intelligent, efficient, cohesive code",
-              "Junior Engineering Associate (Full-Stack) @ Voxa",
+              "Full-Stack Web Developer and Computer Science Enthusiast",
+              "Star Associate of the Year at Voxa",
               "Infusing Artificial Intelligence with user-ended applications",
-              "MySQL-ERN technology stack",
-              "Next.js and Tailwind Expertise",
-              "International CS Competition Bronze Honor Finalist (top 8% internationally)",
+              "Proficient in Python, JavaScript and C++, with a strong focus on web development",
+              "Next.js and TailwindCSS Expertise",
+              "Comfortable working in AGILE environments and collaborating in cross-functional teams",
+              "International CS Competition Bronze Honor Finalist (top 8% intl.)",
             ]}
             loop={0}
             cursor
@@ -191,10 +189,8 @@ const Header = memo(() => {
         </p>
       </div>
     </div>
-
   );
 });
-
 
 const MainContent = memo(function MainContent() {
   const techs = [
@@ -210,6 +206,8 @@ const MainContent = memo(function MainContent() {
     { src: NEXT, url: "https://nextjs.org" },
     { src: TS, url: "https://www.typescriptlang.org" },
     { src: FIREBASE, url: "https://firebase.google.com/" },
+    { src: SUPABASE, url: "https://supabase.com/" },
+    { src: CPP, url: "https://isocpp.org/" },
   ];
 
   return (
@@ -224,7 +222,7 @@ const MainContent = memo(function MainContent() {
           the A-Level course in GEMS Founders School Al Barsha, and will be applying for a BSc in Computer Science at university.
           <br />
           <br />
-          I am a full-stack web developer, specializing in Next.js and Tailwind. I'm flexible with SQL approaches such as MySQL or No-SQL approaches like Firebase. I place heavy priority on clean and user-oriented UIs. I believe form is function. I'm also proficient in Python, and have experience working with backends in Python, though I typically work with MySQL-ERN or Next.js routes.
+          I am a full-stack web developer, specializing in Next.js and TailwindCSS. I'm flexible with SQL approaches such as MySQL or No-SQL approaches like Firebase or Supabase. I place heavy priority on clean and user-oriented UIs; I believe form is function. I'm also proficient in Python and C++, and have experience working with backends in Python, though I typically work with MySQL-ERN or Next.js routes.
         </p>
 
         <section id="experience" className="section section-pad">
@@ -256,7 +254,7 @@ const MainContent = memo(function MainContent() {
 
                 <div className="flex items-center gap-4">
                   <span className="text-sm sm:text-base text-gray-400">
-                    2025 - Present
+                    2025 - 2026
                   </span>
                   <a
                     href="https://voxa.club"
@@ -278,11 +276,8 @@ const MainContent = memo(function MainContent() {
                       <h4 className="text-xl md:text-2xl font-bold text-white">
                         Junior Engineering Associate
                       </h4>
-                      <span className="px-2 xl:py-0.5 sm:py-0 text-xs font-semibold rounded-full bg-[#b592ff]/15 text-[#b592ff] border border-[#b592ff]/40">
-                        Current
-                      </span>
                     </div>
-                    <p className="text-sm text-gray-400">October 2025 — Present</p>
+                    <p className="text-sm text-gray-400">October 2025 — April 2026</p>
                   </div>
 
                   <div>
@@ -298,7 +293,7 @@ const MainContent = memo(function MainContent() {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">
                   As part of a cross-functional development team, I contributed
                   to building
-                  <strong> Voxa </strong>— a full-stack, AI-powered web
+                  <strong> Voxa </strong>, a full-stack, AI-powered web
                   application designed to enhance public speaking skills. I
                   worked on everything from voice processing to user experience,
                   integrating real-time transcription, feedback mechanisms, and
@@ -316,6 +311,7 @@ const MainContent = memo(function MainContent() {
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div
                   className="
+  flex items-center justify-center
   bg-gradient-to-br from-zinc-900/65 via-neutral-900/50 to-black/35 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
   hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
@@ -323,28 +319,30 @@ const MainContent = memo(function MainContent() {
 "
                 >
                   AssemblyAI WebSocket live transcription and OpenAI API rapid
-                  personalized feedback.
+                  personalized feedback generation.
                 </div>
                 <div
                   className="
+  flex items-center justify-center
   bg-gradient-to-br from-zinc-900/65 via-neutral-900/50 to-black/35 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
   hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
 "
                 >
-                  Firebase Auth, Firestore, and Storage integration with Next.js
+                  Firebase Auth, Firestore, and Storage and now Supabase integration with Next.js
                   Routes.
                 </div>
                 <div
                   className="
+  flex items-center justify-center
   bg-gradient-to-br from-zinc-900/65 via-neutral-900/50 to-black/35 border border-white/20 rounded-lg px-4 py-3 text-gray-200 text-center
   transition duration-300
   hover:bg-[#b592ff]/10 hover:border-[#b592ff]/40 hover:shadow-md hover:shadow-[#b592ff]/20
   hover:-translate-y-0.5
 "
                 >
-                  Engaging XP system, onboarding flow & performance analytics.
+                  Engaging progress system, onboarding flow & performance analytics.
                 </div>
               </div>
             </article>
@@ -360,7 +358,7 @@ const MainContent = memo(function MainContent() {
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">TLSearch</h3>
                   <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-                    A semantic search engine for NASA Space Apps Challenge built with Next.js and FastAPI, using vector embeddings to query space biology research papers with AI-generated summaries.
+                    A semantic search engine for NASA Space Apps Challenge 2025, built with Next.js and FastAPI, using vector embeddings to query space biology research papers with AI-generated summaries.  <br /> <i>Important to note: Due to Render's inactivity restrictions, initial loading times may exceed just over 1 minute.</i>
                   </p>
                   <a
                     href="https://tlsearch.org"
@@ -386,8 +384,16 @@ const MainContent = memo(function MainContent() {
                     FormulaMetric
                   </h3>
                   <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-                    An intelligent F1 performance analytics tool built with MySQL, Express, React, and Node.js, featuring advanced statistical models for formula-level performance insights. In Progress...
+                    An intelligent F1 performance analytics tool built with MySQL, Express, React, and Node.js and deployed on Vercel, Render and Aiven. Leveraging z-score, quartile trend analysis, sigmoid transformations and team-mate ratio comparisons, FormulaMetric is able to provide objective and holistic insight into the performance of F1 drivers. <br /> <i>Important to note: Due to Render's inactivity restrictions, initial loading times may exceed just over 1 minute.</i>
                   </p>
+                  <a
+                    href="https://www.formulametric.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#ff0000] hover:underline"
+                  >
+                    View Website
+                  </a>
                 </div>
                 <img
                   loading="lazy"
@@ -428,7 +434,7 @@ const MainContent = memo(function MainContent() {
                 <div className="text-center sm:text-left text-white flex-1">
                   <h3 className="subtitle">aayanpathan.com</h3>
                   <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-                    My personal portfolio and blog, built with Vite, React, TypeScript, and Tailwind CSS with interactive Vanta.js animations.
+                    My personal portfolio, built with Vite, React, TypeScript, and TailwindCSS with interactive Vanta.js animations.
                   </p>
                   <a
                     href="http://www.aayanpathan.com"
@@ -461,7 +467,7 @@ const MainContent = memo(function MainContent() {
             <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-32 z-20 bg-gradient-to-r from-[#0f0f17] to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 z-20 bg-gradient-to-l from-[#0f0f17] to-transparent" />
 
-            <Marquee autoFill pauseOnHover speed={55} className="py-2">
+            <Marquee autoFill pauseOnHover speed={75} className="py-2">
               {techs.map(({ src, url }, i) => {
                 const isExpressOrNext = src === EXPRESS || src === NEXT;
                 return (

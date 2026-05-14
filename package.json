@@ -1,0 +1,23 @@
+{
+  "name": "aayanpathan.com-neo",
+  "version": "1.0.0",
+  "description": "neo version of my website, much cooler. better description to come soon.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SyntaxSnipes/aayanpathan.com-neo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SyntaxSnipes/aayanpathan.com-neo/issues"
+  },
+  "homepage": "https://github.com/SyntaxSnipes/aayanpathan.com-neo#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0"
+  }
+}

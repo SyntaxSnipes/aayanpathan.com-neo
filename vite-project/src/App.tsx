@@ -437,7 +437,7 @@ const MainContent = memo(function MainContent() {
                     {/* Front face */}
                     <div className={`absolute inset-0 rounded-2xl overflow-hidden [backface-visibility:hidden] border ${p.border}`}>
                       {p.isLogo ? (
-                        <div className={`w-full h-full bg-gradient-to-br ${p.bg} backdrop-blur-md flex items-center justify-center`}>
+                        <div className={`w-full h-full bg-gradient-to-br ${p.bg} backdrop-blur-md flex items-center justify-center [backface-visibility:hidden]`}>
                           <img src={p.image} alt={p.name} className="h-16 object-contain opacity-90" />
                         </div>
                       ) : (

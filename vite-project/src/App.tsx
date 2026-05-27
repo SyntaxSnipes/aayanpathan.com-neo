@@ -193,6 +193,9 @@ const Header = memo(() => {
 });
 
 const MainContent = memo(function MainContent() {
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
+  const [academicsTab, setAcademicsTab] = useState<"gcse" | "alevels" | "aslevel">("gcse");
+
   const techs = [
     { src: REACT, url: "https://reactjs.org" },
     { src: JS, url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
@@ -350,108 +353,132 @@ const MainContent = memo(function MainContent() {
         </section>
 
         <section className="section section-pad">
-
           <div className="section-stack">
             <h2 className="section-title">My Projects</h2>
-            <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-gradient-to-br from-yellow-500/5 via-white/5 to-transparent backdrop-blur-md border border-yellow-400/30 hover:border-yellow-400/60 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-                <div className="text-center sm:text-left text-white flex-1">
-                  <h3 className="subtitle">TLSearch</h3>
-                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-                    A semantic search engine for NASA Space Apps Challenge 2025, built with Next.js and FastAPI, using vector embeddings to query space biology research papers with AI-generated summaries.  <br /> <i>Important to note: Due to Render's inactivity restrictions, initial loading times may exceed just over 1 minute.</i>
-                  </p>
-                  <a
-                    href="https://tlsearch.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#f8ff48] hover:underline"
+            <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
+              {(
+                [
+                  {
+                    name: "TLSearch",
+                    description: "A semantic search engine built with Next.js and FastAPI, using vector embeddings to query space biology research papers with AI-generated summaries.",
+                    note: "Initial load may exceed 1 min due to Render inactivity.",
+                    tags: ["Next.js", "FastAPI", "Python", "Vector Embeddings", "AI"],
+                    url: "https://tlsearch.org",
+                    image: tlsearch,
+                    isLogo: false,
+                    border: "border-yellow-400/35",
+                    accent: "via-yellow-400/55",
+                    bg: "from-yellow-500/15 via-yellow-500/5 to-black/75",
+                    tagCls: "bg-yellow-400/10 border-yellow-400/20 text-yellow-200/80",
+                    linkCls: "text-yellow-300",
+                  },
+                  {
+                    name: "FormulaMetric",
+                    description: "Intelligent F1 performance analytics using z-score, quartile trend analysis, sigmoid transformations and team-mate ratio comparisons for objective driver insight.",
+                    note: "Initial load may exceed 1 min due to Render inactivity.",
+                    tags: ["MySQL", "Express", "React", "Node.js", "Vercel", "Aiven"],
+                    url: "https://www.formulametric.com",
+                    image: FMImg,
+                    isLogo: false,
+                    border: "border-rose-400/35",
+                    accent: "via-rose-400/55",
+                    bg: "from-rose-500/15 via-rose-500/5 to-black/75",
+                    tagCls: "bg-rose-400/10 border-rose-400/20 text-rose-200/80",
+                    linkCls: "text-rose-300",
+                  },
+                  {
+                    name: "Voxa Voice App",
+                    description: "An AI-powered public speaking coach built with Next.js and TypeScript. Features real-time voice transcription via AssemblyAI, instant personalised feedback powered by OpenAI, a gamified progress system, and a community platform — backed by Firebase and Supabase.",
+                    note: "",
+                    tags: ["Next.js", "TypeScript", "Firebase", "Supabase", "AssemblyAI"],
+                    url: "https://voxa.club",
+                    image: voxa,
+                    isLogo: true,
+                    border: "border-purple-400/35",
+                    accent: "via-purple-400/55",
+                    bg: "from-purple-500/15 via-purple-500/5 to-black/75",
+                    tagCls: "bg-purple-400/10 border-purple-400/20 text-purple-200/80",
+                    linkCls: "text-purple-300",
+                  },
+                  {
+                    name: "aayanpathan.com",
+                    description: "My personal portfolio built with Vite, React, TypeScript, and TailwindCSS. Features a glassmorphic design with interactive Vanta.js NET animations.",
+                    note: "",
+                    tags: ["React", "Vite", "TypeScript", "TailwindCSS", "Vanta.js"],
+                    url: "http://www.aayanpathan.com",
+                    image: AayanWeb,
+                    isLogo: false,
+                    border: "border-cyan-400/35",
+                    accent: "via-cyan-400/55",
+                    bg: "from-cyan-500/15 via-cyan-500/5 to-black/75",
+                    tagCls: "bg-cyan-400/10 border-cyan-400/20 text-cyan-200/80",
+                    linkCls: "text-cyan-300",
+                  },
+                ] as const
+              ).map((p, i) => (
+                <div
+                  key={i}
+                  className="relative h-80 [perspective:1200px] cursor-pointer select-none"
+                  onMouseEnter={() => {
+                    if (window.matchMedia("(hover: hover)").matches) setFlippedIndex(i);
+                  }}
+                  onMouseLeave={() => {
+                    if (window.matchMedia("(hover: hover)").matches) setFlippedIndex(null);
+                  }}
+                  onClick={() => {
+                    if (!window.matchMedia("(hover: hover)").matches)
+                      setFlippedIndex((prev) => (prev === i ? null : i));
+                  }}
+                >
+                  <div
+                    className="relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-in-out"
+                    style={{ transform: flippedIndex === i ? "rotateY(180deg)" : "rotateY(0deg)" }}
                   >
-                    View Website
-                  </a>
-                </div>
-                <img
-                  loading="lazy"
-                  src={tlsearch}
-                  alt="TLSearch Screenshot"
-                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-gradient-to-br from-rose-500/5 via-white/5 to-transparent backdrop-blur-md border border-rose-400/30 hover:border-rose-400/60 hover:shadow-lg hover:shadow-rose-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-                <div className="text-center sm:text-left text-white flex-1">
-                  <h3 className="subtitle">
-                    FormulaMetric
-                  </h3>
-                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-                    An intelligent F1 performance analytics tool built with MySQL, Express, React, and Node.js and deployed on Vercel, Render and Aiven. Leveraging z-score, quartile trend analysis, sigmoid transformations and team-mate ratio comparisons, FormulaMetric is able to provide objective and holistic insight into the performance of F1 drivers. <br /> <i>Important to note: Due to Render's inactivity restrictions, initial loading times may exceed just over 1 minute.</i>
-                  </p>
-                  <a
-                    href="https://www.formulametric.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#ff0000] hover:underline"
-                  >
-                    View Website
-                  </a>
-                </div>
-                <img
-                  loading="lazy"
-                  src={FMImg}
-                  alt="FormulaMetric Screenshot"
-                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
-                />
-              </div>
-            </div>
+                    {/* Front face */}
+                    <div className={`absolute inset-0 rounded-2xl overflow-hidden [backface-visibility:hidden] border ${p.border}`}>
+                      {p.isLogo ? (
+                        <div className={`w-full h-full bg-gradient-to-br ${p.bg} backdrop-blur-md flex items-center justify-center`}>
+                          <img src={p.image} alt={p.name} className="h-16 object-contain opacity-90" />
+                        </div>
+                      ) : (
+                        <img src={p.image} alt={p.name} loading="lazy" className="w-full h-full object-cover object-top" />
+                      )}
+                      {!p.isLogo && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />}
+                      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${p.accent} to-transparent`} />
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 className="text-xl font-bold text-white drop-shadow-md">{p.name}</h3>
+                        <p className="text-xs text-white/40 mt-0.5">hover · tap to flip</p>
+                      </div>
+                    </div>
 
-            <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-gradient-to-br from-purple-500/5 via-white/5 to-transparent backdrop-blur-md border border-purple-400/30 hover:border-purple-400/60 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-                <div className="text-center sm:text-left text-white flex-1">
-                  <h3 className="subtitle">Voxa Voice App</h3>
-                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-                    Voxa is an AI-powered public speaking coach built with Next.js, TypeScript, Firebase, and Supabase, featuring real-time transcription, instant feedback, and a supportive community.
-                  </p>
-                  <a
-                    href="https://voxa.club"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#b592ff] hover:underline"
-                  >
-                    View Website
-                  </a>
+                    {/* Back face */}
+                    <div className={`absolute inset-0 rounded-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] border ${p.border} bg-gradient-to-br ${p.bg} backdrop-blur-md p-6 flex flex-col justify-center gap-5 overflow-hidden`}>
+                      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${p.accent} to-transparent`} />
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
+                        <p className="text-gray-300 text-sm leading-relaxed">{p.description}</p>
+                        {p.note && <p className={`text-xs mt-2 italic ${p.linkCls} opacity-55`}>{p.note}</p>}
+                      </div>
+                      <div>
+                        <div className="flex flex-wrap gap-1.5 justify-center mb-4">
+                          {p.tags.map((tag) => (
+                            <span key={tag} className={`text-xs px-2 py-0.5 rounded-md border ${p.tagCls}`}>{tag}</span>
+                          ))}
+                        </div>
+                        <a
+                          href={p.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className={`inline-block ${p.linkCls} text-sm font-medium hover:underline`}
+                        >
+                          View Website →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <img
-                  loading="lazy"
-                  src={voxa}
-                  alt="Voxa Screenshot"
-                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-full max-w-4xl bg-gradient-to-br from-cyan-500/5 via-white/5 to-transparent backdrop-blur-md border border-cyan-400/30 hover:border-cyan-400/60 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out rounded-2xl shadow-lg flex flex-col sm:flex-row items-center sm:justify-between p-6 gap-6">
-                <div className="text-center sm:text-left text-white flex-1">
-                  <h3 className="subtitle">aayanpathan.com</h3>
-                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-                    My personal portfolio, built with Vite, React, TypeScript, and TailwindCSS with interactive Vanta.js animations.
-                  </p>
-                  <a
-                    href="http://www.aayanpathan.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sky-400 hover:underline"
-                  >
-                    View Website
-                  </a>
-                </div>
-                <img
-                  loading="lazy"
-                  src={AayanWeb}
-                  alt="Portfolio Screenshot"
-                  className="w-full sm:w-auto max-h-40 rounded-lg object-contain"
-                />
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -497,44 +524,92 @@ const MainContent = memo(function MainContent() {
         <section id="academics" className="section section-pad">
           <div className="section-stack">
             <h2 className="section-title">Academics</h2>
+            <div className="w-full max-w-xl mx-auto bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg">
 
-            <div className="flex flex-col lg:flex-row gap-8">
-              {/* GCSEs */}
-              <div className="w-full lg:w-1/2 bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-500/20">
-                <h3 className="subtitle mb-4">GCSEs</h3>
-                <p className="text-white/80 text-center mb-2">
-                  <strong>School:</strong> GEMS Founders School — Al Barsha
-                </p>
-                <p className="text-white/70 text-center text-sm leading-relaxed mb-6">
-                  <strong className="text-white">Subjects:</strong> Mathematics,
-                  Computer Science, Chemistry, Psychology, Physics, Business,
-                  English Literature, English Language, Further Pure
-                  Mathematics.
-                </p>
-                <div className="flex justify-center">
-                  <span className="inline-block text-cyan-400 border border-cyan-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-cyan-400 hover:text-black transition-colors duration-300">
-                    Grades: 999988877 (equivalent to A*A*A*A*A*A*A*AA)
-                  </span>
-                </div>
+              {/* Header */}
+              <p className="text-white/35 text-xs text-center mb-4">GEMS Founders School — Al Barsha</p>
+
+              {/* Tabs */}
+              <div className="flex justify-center gap-2 mb-6">
+                {(["gcse", "aslevel", "alevels"] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setAcademicsTab(tab)}
+                    className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      academicsTab === tab
+                        ? "bg-white/15 border border-white/25 text-white"
+                        : "text-white/35 hover:text-white/60 border border-transparent"
+                    }`}
+                  >
+                    {tab === "gcse" ? "GCSEs" : tab === "alevels" ? "A-Levels" : "AS-Levels"}
+                  </button>
+                ))}
               </div>
+
+              {/* GCSEs */}
+              {academicsTab === "gcse" && ([
+                { subject: "Mathematics",             grade: "9" },
+                { subject: "Computer Science",        grade: "9" },
+                { subject: "Chemistry",               grade: "9" },
+                { subject: "Psychology",              grade: "9" },
+                { subject: "Physics",                 grade: "8" },
+                { subject: "Business",                grade: "8" },
+                { subject: "English Literature",      grade: "8" },
+                { subject: "English Language",        grade: "7" },
+                { subject: "Further Pure Mathematics",grade: "7" },
+              ] as const).map(({ subject, grade }, i, arr) => (
+                <div key={subject} className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
+                  <span className="text-sm text-white/75">{subject}</span>
+                  <span className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
+                    grade === "9" ? "bg-amber-500/20 border-amber-500/35 text-amber-400"       :
+                    grade === "8" ? "bg-emerald-400/15 border-emerald-400/25 text-emerald-300" :
+                                    "bg-sky-400/10 border-sky-400/20 text-sky-300"
+                  }`}>{grade}</span>
+                </div>
+              ))}
 
               {/* A-Levels */}
-              <div className="w-full lg:w-1/2 bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-emerald-500/20 flex flex-col justify-between">
-                <h3 className="subtitle mb-4">A-Levels</h3>
-                <p className="text-white/80 text-center mb-2">
-                  <strong>School:</strong> GEMS Founders School — Al Barsha
-                </p>
-                <p className="text-white/70 text-center text-sm leading-relaxed mb-6">
-                  <strong className="text-white">Subjects:</strong> Mathematics,
-                  Further Mathematics, Physics, Computer Science.
-                </p>
-                <div className="flex justify-center">
-                  <span className="inline-block text-emerald-400 border border-emerald-400 px-5 py-2 text-sm rounded-full bg-white/5 backdrop-blur-sm hover:bg-emerald-400 hover:text-black transition-colors duration-300">
-                    A* in Math, A in AS Physics and Further Math, Predicted A* in Further Math,
-                    and A in Physics and CS
-                  </span>
+              {academicsTab === "alevels" && ([
+                { subject: "Mathematics",        grade: "A*", predicted: false },
+                { subject: "Further Mathematics",grade: "A*", predicted: true  },
+                { subject: "Physics",            grade: "A",  predicted: true  },
+                { subject: "Computer Science",   grade: "A",  predicted: true  },
+              ] as const).map(({ subject, grade, predicted }, i, arr) => (
+                <div key={subject} className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
+                  <span className="text-sm text-white/75">{subject}</span>
+                  <div className="flex items-center gap-2">
+                    {predicted && <span className="text-[11px] text-white/25 tracking-wide">predicted</span>}
+                    <span className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
+                      grade === "A*" ? "bg-amber-500/20 border-amber-500/35 text-amber-400"        :
+                                       "bg-emerald-400/15 border-emerald-400/25 text-emerald-300"
+                    }`}>{grade}</span>
+                  </div>
                 </div>
-              </div>
+              ))}
+
+              {/* AS-Levels */}
+              {academicsTab === "aslevel" && (<>
+                {([
+                  { subject: "Mathematics",        internal: false },
+                  { subject: "Further Mathematics",internal: false },
+                  { subject: "Physics",            internal: false },
+                  { subject: "Computer Science",   internal: true  },
+                ] as const).map(({ subject, internal }, i, arr) => (
+                  <div key={subject} className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
+                    <span className={`text-sm ${internal ? "text-white/40" : "text-white/75"}`}>{subject}</span>
+                    <div className="flex items-center gap-2">
+                      {internal && <span className="text-[11px] text-white/25 tracking-wide">internal</span>}
+                      <span className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
+                        internal
+                          ? "bg-white/5 border-white/10 border-dashed text-white/30"
+                          : "bg-amber-500/20 border-amber-500/35 text-amber-400"
+                      }`}>A</span>
+                    </div>
+                  </div>
+                ))}
+                <p className="text-white/25 text-[11px] mt-4 text-center">CS grade is teacher-assessed, not externally examined</p>
+              </>)}
+
             </div>
           </div>
         </section>
@@ -547,36 +622,23 @@ const MainContent = memo(function MainContent() {
           </div>
         </section>
       </div>
-      <footer className="w-full h-50 gap-7 flex flex-col py-10">
-        <h3 className="text-3xl md:text-4xl font-bold mt-2 z-1">
-          My CV and Platforms
-        </h3>
-        <span className="flex flex-row gap-10 items-center justify-center z-1">
+      <footer className="w-full py-20 flex flex-col items-center gap-1">
+        {([
+          { label: "LinkedIn",         href: "https://www.linkedin.com/in/mohammed-aayan-pathan/", hoverCls: "hover:text-[#5ba4e0]", lineCls: "bg-[#5ba4e0]" },
+          { label: "GitHub",           href: "https://github.com/SyntaxSnipes",                   hoverCls: "hover:text-white",      lineCls: "bg-white"    },
+          { label: "Curriculum Vitae", href: "../Aayan_CV_March15.pdf",                           hoverCls: "hover:text-cyan-300",   lineCls: "bg-cyan-400" },
+        ] as const).map(({ label, href, hoverCls, lineCls }) => (
           <a
-            className="hover:underline text-cyan-400 z-1"
+            key={label}
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.linkedin.com/in/mohammed-aayan-pathan/"
+            className={`relative text-4xl md:text-5xl lg:text-6xl font-bold text-white/25 ${hoverCls} transition-colors duration-300 group leading-tight`}
           >
-            LinkedIn Profile
+            {label}
+            <span className={`absolute -bottom-0.5 left-0 h-px w-0 ${lineCls} transition-[width] duration-500 ease-out group-hover:w-full`} />
           </a>
-          <a
-            className="hover:underline text-cyan-400 z-1"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="../Aayan_CV_March15.pdf"
-          >
-            CV
-          </a>
-          <a
-            className="hover:underline text-cyan-400 z-1"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/SyntaxSnipes"
-          >
-            GitHub Profile
-          </a>
-        </span>
+        ))}
       </footer>
     </section>
   );

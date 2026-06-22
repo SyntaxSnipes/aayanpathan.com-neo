@@ -4,8 +4,8 @@ import { Typewriter } from "react-simple-typewriter";
 import FMImg from "./assets/FMss.png";
 import voxa from "./assets/voxatextlogo.svg";
 import Marquee from "react-fast-marquee";
-import AayanWeb from "./assets/aayanweb.png";
 import tlsearch from "./assets/tlsearch.png";
+import unimetric from './assets/UMss.png'
 import CSS from "./assets/tech-stack-icons/CSSLogo.svg";
 import MySQL from "./assets/tech-stack-icons/MySQLLogo.svg";
 import HTML5 from "./assets/tech-stack-icons/HTML5Logo.svg";
@@ -401,12 +401,12 @@ const MainContent = memo(function MainContent() {
                     linkCls: "text-purple-300",
                   },
                   {
-                    name: "aayanpathan.com",
-                    description: "My personal portfolio built with Vite, React, TypeScript, and TailwindCSS. Features a glassmorphic design with interactive Vanta.js NET animations.",
+                    name: "UniMetric",
+                    description: "A university ranking website that lets people choose factors that they care about, while also letting them compare multiple universities on each factor.",
                     note: "",
-                    tags: ["React", "Vite", "TypeScript", "TailwindCSS", "Vanta.js"],
-                    url: "http://www.aayanpathan.com",
-                    image: AayanWeb,
+                    tags: ["React", "Vite", "TypeScript", "TailwindCSS"],
+                    url: "https://syntaxsnipes.github.io/UniMetric/",
+                    image: unimetric,
                     isLogo: false,
                     border: "border-cyan-400/35",
                     accent: "via-cyan-400/55",

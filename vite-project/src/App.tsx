@@ -5,7 +5,7 @@ import FMImg from "./assets/FMss.png";
 import voxa from "./assets/voxatextlogo.svg";
 import Marquee from "react-fast-marquee";
 import tlsearch from "./assets/tlsearch.png";
-import unimetric from './assets/UMss.png'
+import unimetric from "./assets/UMss.png";
 import CSS from "./assets/tech-stack-icons/CSSLogo.svg";
 import MySQL from "./assets/tech-stack-icons/MySQLLogo.svg";
 import HTML5 from "./assets/tech-stack-icons/HTML5Logo.svg";
@@ -52,7 +52,6 @@ function useVantaNet(ref: React.RefObject<HTMLDivElement | null>) {
         maxDistance: window.innerWidth < 640 ? 12 : 20,
         spacing: 20.0,
       });
-
     }
 
     return () => {
@@ -76,7 +75,7 @@ const ContactForm = memo(function ContactForm() {
         "service_2zlojgi",
         "template_1deljjl",
         formEl,
-        "cvuiRUMw64Soebb11"
+        "cvuiRUMw64Soebb11",
       )
       .then(() => {
         console.log("Message sent to me");
@@ -89,7 +88,7 @@ const ContactForm = memo(function ContactForm() {
               user_name: formEl.user_name.value,
               user_email: formEl.user_email.value,
             },
-            "cvuiRUMw64Soebb11"
+            "cvuiRUMw64Soebb11",
           )
           .then(() => {
             console.log("Auto-reply sent to user ✅");
@@ -120,7 +119,6 @@ const ContactForm = memo(function ContactForm() {
         hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-white/40
       "
     >
-
       <input
         type="text"
         name="user_name"
@@ -164,7 +162,10 @@ const Header = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   useVantaNet(ref);
   return (
-    <div ref={ref} className="relative w-screen min-h-screen flex items-center justify-center overflow-hidden">
+    <div
+      ref={ref}
+      className="relative w-screen min-h-screen flex items-center justify-center overflow-hidden"
+    >
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <h1 className="text-5xl md:text-6xl lg:text-8xl font-heading font-bold text-white">
           Mohammed Aayan Pathan
@@ -194,7 +195,9 @@ const Header = memo(() => {
 
 const MainContent = memo(function MainContent() {
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
-  const [academicsTab, setAcademicsTab] = useState<"gcse" | "alevels" | "aslevel">("gcse");
+  const [academicsTab, setAcademicsTab] = useState<
+    "gcse" | "alevels" | "aslevel"
+  >("gcse");
 
   const techs = [
     { src: REACT, url: "https://reactjs.org" },
@@ -218,14 +221,20 @@ const MainContent = memo(function MainContent() {
       <div className="relative z-10 section section-pad section-stack">
         <h2 className="section-title relative z-20">About Me</h2>
         <p className="text-md md:text-xl sm:text-lg text-gray-200 max-w-xl px-6 sm:px:6 lg:px-16 xl:px-0 leading-relaxed relative z-20">
-          I'm Mohammed Aayan Pathan. I'm 17 years old and I'm from India, though I reside, study and work in the UAE. I've been
-          fascinated by the technical ingenunity and capabilities of technology since a young age, and ever since, I've
-          been on a journey to understand and leverage technology for
-          practically everything! I am currently in Year 13, on my last year of
-          the A-Level course in GEMS Founders School Al Barsha, and will be applying for a BSc in Computer Science at university.
+          I'm Mohammed Aayan Pathan. I'm 17 years old and I'm from India, though
+          I reside, study and work in the UAE. I've been fascinated by the
+          technical ingenunity and capabilities of technology since a young age,
+          and ever since, I've been on a journey to understand and leverage
+          technology for practically everything! I am currently in Year 13, on
+          my last year of the A-Level course in GEMS Founders School Al Barsha,
+          and will be applying for a BSc in Computer Science at university.
           <br />
-          <br />
-          I am a full-stack web developer, specializing in Next.js and TailwindCSS. I'm flexible with SQL approaches such as MySQL or No-SQL approaches like Firebase or Supabase. I place heavy priority on clean and user-oriented UIs; I believe form is function. I'm also proficient in Python and C++, and have experience working with backends in Python, though I typically work with MySQL-ERN or Next.js routes.
+          <br />I am a full-stack web developer, specializing in Next.js and
+          TailwindCSS. I'm flexible with SQL approaches such as MySQL or No-SQL
+          approaches like Firebase or Supabase. I place heavy priority on clean
+          and user-oriented UIs; I believe form is function. I'm also proficient
+          in Python and C++, and have experience working with backends in
+          Python, though I typically work with MySQL-ERN or Next.js routes.
         </p>
 
         <section id="experience" className="section section-pad">
@@ -280,7 +289,9 @@ const MainContent = memo(function MainContent() {
                         Junior Engineering Associate
                       </h4>
                     </div>
-                    <p className="text-sm text-gray-400">October 2025 — April 2026</p>
+                    <p className="text-sm text-gray-400">
+                      October 2025 — April 2026
+                    </p>
                   </div>
 
                   <div>
@@ -333,8 +344,8 @@ const MainContent = memo(function MainContent() {
   hover:-translate-y-0.5
 "
                 >
-                  Firebase Auth, Firestore, and Storage and now Supabase integration with Next.js
-                  Routes.
+                  Firebase Auth, Firestore, and Storage and now Supabase
+                  integration with Next.js Routes.
                 </div>
                 <div
                   className="
@@ -345,7 +356,8 @@ const MainContent = memo(function MainContent() {
   hover:-translate-y-0.5
 "
                 >
-                  Engaging progress system, onboarding flow & performance analytics.
+                  Engaging progress system, onboarding flow & performance
+                  analytics.
                 </div>
               </div>
             </article>
@@ -360,49 +372,75 @@ const MainContent = memo(function MainContent() {
                 [
                   {
                     name: "TLSearch",
-                    description: "A semantic search engine built with Next.js and FastAPI, using vector embeddings to query space biology research papers with AI-generated summaries.",
+                    description:
+                      "A semantic search engine built with Next.js and FastAPI, using vector embeddings to query space biology research papers with AI-generated summaries.",
                     note: "Initial load may exceed 1 min due to Render inactivity.",
-                    tags: ["Next.js", "FastAPI", "Python", "Vector Embeddings", "AI"],
+                    tags: [
+                      "Next.js",
+                      "FastAPI",
+                      "Python",
+                      "Vector Embeddings",
+                      "AI",
+                    ],
                     url: "https://tlsearch.org",
                     image: tlsearch,
                     isLogo: false,
                     border: "border-yellow-400/35",
                     accent: "via-yellow-400/55",
                     bg: "from-yellow-500/15 via-yellow-500/5 to-black/75",
-                    tagCls: "bg-yellow-400/10 border-yellow-400/20 text-yellow-200/80",
+                    tagCls:
+                      "bg-yellow-400/10 border-yellow-400/20 text-yellow-200/80",
                     linkCls: "text-yellow-300",
                   },
                   {
                     name: "FormulaMetric",
-                    description: "Intelligent F1 performance analytics using z-score, quartile trend analysis, sigmoid transformations and team-mate ratio comparisons for objective driver insight.",
+                    description:
+                      "Intelligent F1 performance analytics using z-score, quartile trend analysis, sigmoid transformations and team-mate ratio comparisons for objective driver insight.",
                     note: "Initial load may exceed 1 min due to Render inactivity.",
-                    tags: ["MySQL", "Express", "React", "Node.js", "Vercel", "Aiven"],
+                    tags: [
+                      "MySQL",
+                      "Express",
+                      "React",
+                      "Node.js",
+                      "Vercel",
+                      "Aiven",
+                    ],
                     url: "https://www.formulametric.com",
                     image: FMImg,
                     isLogo: false,
                     border: "border-rose-400/35",
                     accent: "via-rose-400/55",
                     bg: "from-rose-500/15 via-rose-500/5 to-black/75",
-                    tagCls: "bg-rose-400/10 border-rose-400/20 text-rose-200/80",
+                    tagCls:
+                      "bg-rose-400/10 border-rose-400/20 text-rose-200/80",
                     linkCls: "text-rose-300",
                   },
                   {
                     name: "Voxa Voice App",
-                    description: "An AI-powered public speaking coach built with Next.js and TypeScript. Features real-time voice transcription via AssemblyAI, instant personalised feedback powered by OpenAI, a gamified progress system, and a community platform — backed by Firebase and Supabase.",
+                    description:
+                      "An AI-powered public speaking coach built with Next.js and TypeScript. Features real-time voice transcription via AssemblyAI, instant personalised feedback powered by OpenAI, a gamified progress system, and a community platform — backed by Firebase and Supabase.",
                     note: "",
-                    tags: ["Next.js", "TypeScript", "Firebase", "Supabase", "AssemblyAI"],
+                    tags: [
+                      "Next.js",
+                      "TypeScript",
+                      "Firebase",
+                      "Supabase",
+                      "AssemblyAI",
+                    ],
                     url: "https://voxa.club",
                     image: voxa,
                     isLogo: true,
                     border: "border-purple-400/35",
                     accent: "via-purple-400/55",
                     bg: "from-purple-500/15 via-purple-500/5 to-black/75",
-                    tagCls: "bg-purple-400/10 border-purple-400/20 text-purple-200/80",
+                    tagCls:
+                      "bg-purple-400/10 border-purple-400/20 text-purple-200/80",
                     linkCls: "text-purple-300",
                   },
                   {
                     name: "UniMetric",
-                    description: "Reweight QS's 10 ranking factors to build your own personalised university ranking across 1,500+ institutions and 5 years of data.",
+                    description:
+                      "Reweight QS's 10 ranking factors to build your own personalised university ranking across 1,500+ institutions and 5 years of data.",
                     note: "",
                     tags: ["React", "Vite", "TypeScript", "TailwindCSS"],
                     url: "https://syntaxsnipes.github.io/UniMetric/",
@@ -411,7 +449,8 @@ const MainContent = memo(function MainContent() {
                     border: "border-cyan-400/35",
                     accent: "via-cyan-400/55",
                     bg: "from-cyan-500/15 via-cyan-500/5 to-black/75",
-                    tagCls: "bg-cyan-400/10 border-cyan-400/20 text-cyan-200/80",
+                    tagCls:
+                      "bg-cyan-400/10 border-cyan-400/20 text-cyan-200/80",
                     linkCls: "text-cyan-300",
                   },
                 ] as const
@@ -420,10 +459,12 @@ const MainContent = memo(function MainContent() {
                   key={i}
                   className="relative h-80 [perspective:1200px] cursor-pointer select-none"
                   onMouseEnter={() => {
-                    if (window.matchMedia("(hover: hover)").matches) setFlippedIndex(i);
+                    if (window.matchMedia("(hover: hover)").matches)
+                      setFlippedIndex(i);
                   }}
                   onMouseLeave={() => {
-                    if (window.matchMedia("(hover: hover)").matches) setFlippedIndex(null);
+                    if (window.matchMedia("(hover: hover)").matches)
+                      setFlippedIndex(null);
                   }}
                   onClick={() => {
                     if (!window.matchMedia("(hover: hover)").matches)
@@ -432,37 +473,82 @@ const MainContent = memo(function MainContent() {
                 >
                   <div
                     className="relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-in-out"
-                    style={{ transform: flippedIndex === i ? "rotateY(180deg)" : "rotateY(0deg)" }}
+                    style={{
+                      transform:
+                        flippedIndex === i
+                          ? "rotateY(180deg)"
+                          : "rotateY(0deg)",
+                    }}
                   >
                     {/* Front face */}
-                    <div className={`absolute inset-0 rounded-2xl overflow-hidden [backface-visibility:hidden] border ${p.border}`}>
+                    <div
+                      className={`absolute inset-0 rounded-2xl overflow-hidden [backface-visibility:hidden] border ${p.border}`}
+                    >
                       {p.isLogo ? (
-                        <div className={`w-full h-full bg-gradient-to-br ${p.bg} flex items-center justify-center`}>
-                          <img src={p.image} alt={p.name} className="h-16 object-contain opacity-90" />
+                        <div
+                          className={`w-full h-full bg-gradient-to-br ${p.bg} flex items-center justify-center`}
+                        >
+                          <img
+                            src={p.image}
+                            alt={p.name}
+                            className="h-16 object-contain opacity-90"
+                          />
                         </div>
                       ) : (
-                        <img src={p.image} alt={p.name} loading="lazy" className="w-full h-full object-cover object-top" />
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          loading="lazy"
+                          className="w-full h-full object-cover object-top"
+                        />
                       )}
-                      {!p.isLogo && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />}
-                      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${p.accent} to-transparent`} />
+                      {!p.isLogo && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                      )}
+                      <div
+                        className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${p.accent} to-transparent`}
+                      />
                       <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <h3 className="text-xl font-bold text-white drop-shadow-md">{p.name}</h3>
-                        <p className="text-xs text-white/40 mt-0.5">hover · tap to flip</p>
+                        <h3 className="text-xl font-bold text-white drop-shadow-md">
+                          {p.name}
+                        </h3>
+                        <p className="text-xs text-white/40 mt-0.5">
+                          hover · tap to flip
+                        </p>
                       </div>
                     </div>
 
                     {/* Back face */}
-                    <div className={`absolute inset-0 rounded-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] border ${p.border} bg-gradient-to-br ${p.bg} backdrop-blur-md p-6 flex flex-col justify-center gap-5 overflow-hidden`}>
-                      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${p.accent} to-transparent`} />
+                    <div
+                      className={`absolute inset-0 rounded-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] border ${p.border} bg-gradient-to-br ${p.bg} backdrop-blur-md p-6 flex flex-col justify-center gap-5 overflow-hidden`}
+                    >
+                      <div
+                        className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${p.accent} to-transparent`}
+                      />
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
-                        <p className="text-gray-300 text-sm leading-relaxed">{p.description}</p>
-                        {p.note && <p className={`text-xs mt-2 italic ${p.linkCls} opacity-55`}>{p.note}</p>}
+                        <h3 className="text-xl font-bold text-white mb-2">
+                          {p.name}
+                        </h3>
+                        <p className="text-gray-300 text-sm leading-relaxed">
+                          {p.description}
+                        </p>
+                        {p.note && (
+                          <p
+                            className={`text-xs mt-2 italic ${p.linkCls} opacity-55`}
+                          >
+                            {p.note}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <div className="flex flex-wrap gap-1.5 justify-center mb-4">
                           {p.tags.map((tag) => (
-                            <span key={tag} className={`text-xs px-2 py-0.5 rounded-md border ${p.tagCls}`}>{tag}</span>
+                            <span
+                              key={tag}
+                              className={`text-xs px-2 py-0.5 rounded-md border ${p.tagCls}`}
+                            >
+                              {tag}
+                            </span>
                           ))}
                         </div>
                         <a
@@ -509,10 +595,11 @@ const MainContent = memo(function MainContent() {
                       src={src}
                       alt=""
                       loading="lazy"
-                      className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${isExpressOrNext
-                        ? "filter invert brightness-40 hover:brightness-200"
-                        : "grayscale opacity-80 hover:grayscale-0"
-                        }`}
+                      className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${
+                        isExpressOrNext
+                          ? "filter invert brightness-40 hover:brightness-200"
+                          : "grayscale opacity-80 hover:grayscale-0"
+                      }`}
                     />
                   </a>
                 );
@@ -525,9 +612,10 @@ const MainContent = memo(function MainContent() {
           <div className="section-stack">
             <h2 className="section-title">Academics</h2>
             <div className="w-full max-w-xl mx-auto bg-gradient-to-br from-zinc-900/60 via-neutral-900/45 to-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg">
-
               {/* Header */}
-              <p className="text-white/35 text-xs text-center mb-4">GEMS Founders School — Al Barsha</p>
+              <p className="text-white/35 text-xs text-center mb-4">
+                GEMS Founders School — Al Barsha
+              </p>
 
               {/* Tabs */}
               <div className="flex justify-center gap-2 mb-6">
@@ -541,75 +629,134 @@ const MainContent = memo(function MainContent() {
                         : "text-white/35 hover:text-white/60 border border-transparent"
                     }`}
                   >
-                    {tab === "gcse" ? "GCSEs" : tab === "alevels" ? "A-Levels" : "AS-Levels"}
+                    {tab === "gcse"
+                      ? "GCSEs"
+                      : tab === "alevels"
+                        ? "A-Levels"
+                        : "AS-Levels"}
                   </button>
                 ))}
               </div>
 
               {/* GCSEs */}
-              {academicsTab === "gcse" && ([
-                { subject: "Mathematics",             grade: "9" },
-                { subject: "Computer Science",        grade: "9" },
-                { subject: "Chemistry",               grade: "9" },
-                { subject: "Psychology",              grade: "9" },
-                { subject: "Physics",                 grade: "8" },
-                { subject: "Business",                grade: "8" },
-                { subject: "English Literature",      grade: "8" },
-                { subject: "English Language",        grade: "7" },
-                { subject: "Further Pure Mathematics",grade: "7" },
-              ] as const).map(({ subject, grade }, i, arr) => (
-                <div key={subject} className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
-                  <span className="text-sm text-white/75">{subject}</span>
-                  <span className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
-                    grade === "9" ? "bg-amber-500/20 border-amber-500/35 text-amber-400"       :
-                    grade === "8" ? "bg-emerald-400/15 border-emerald-400/25 text-emerald-300" :
-                                    "bg-sky-400/10 border-sky-400/20 text-sky-300"
-                  }`}>{grade}</span>
-                </div>
-              ))}
+              {academicsTab === "gcse" &&
+                (
+                  [
+                    { subject: "Mathematics", grade: "9" },
+                    { subject: "Computer Science", grade: "9" },
+                    { subject: "Chemistry", grade: "9" },
+                    { subject: "Psychology", grade: "9" },
+                    { subject: "Physics", grade: "8" },
+                    { subject: "Business", grade: "8" },
+                    { subject: "English Literature", grade: "8" },
+                    { subject: "English Language", grade: "7" },
+                    { subject: "Further Pure Mathematics", grade: "7" },
+                  ] as const
+                ).map(({ subject, grade }, i, arr) => (
+                  <div
+                    key={subject}
+                    className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}
+                  >
+                    <span className="text-sm text-white/75">{subject}</span>
+                    <span
+                      className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
+                        grade === "9"
+                          ? "bg-amber-500/20 border-amber-500/35 text-amber-400"
+                          : grade === "8"
+                            ? "bg-emerald-400/15 border-emerald-400/25 text-emerald-300"
+                            : "bg-sky-400/10 border-sky-400/20 text-sky-300"
+                      }`}
+                    >
+                      {grade}
+                    </span>
+                  </div>
+                ))}
 
               {/* A-Levels */}
-              {academicsTab === "alevels" && ([
-                { subject: "Mathematics",        grade: "A*", predicted: false },
-                { subject: "Further Mathematics",grade: "A*", predicted: true  },
-                { subject: "Physics",            grade: "A",  predicted: true  },
-                { subject: "Computer Science",   grade: "A",  predicted: true  },
-              ] as const).map(({ subject, grade, predicted }, i, arr) => (
-                <div key={subject} className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
-                  <span className="text-sm text-white/75">{subject}</span>
-                  <div className="flex items-center gap-2">
-                    {predicted && <span className="text-[11px] text-white/25 tracking-wide">predicted</span>}
-                    <span className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
-                      grade === "A*" ? "bg-amber-500/20 border-amber-500/35 text-amber-400"        :
-                                       "bg-emerald-400/15 border-emerald-400/25 text-emerald-300"
-                    }`}>{grade}</span>
-                  </div>
-                </div>
-              ))}
-
-              {/* AS-Levels */}
-              {academicsTab === "aslevel" && (<>
-                {([
-                  { subject: "Mathematics",        internal: false },
-                  { subject: "Further Mathematics",internal: false },
-                  { subject: "Physics",            internal: false },
-                  { subject: "Computer Science",   internal: true  },
-                ] as const).map(({ subject, internal }, i, arr) => (
-                  <div key={subject} className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}>
-                    <span className={`text-sm ${internal ? "text-white/40" : "text-white/75"}`}>{subject}</span>
+              {academicsTab === "alevels" &&
+                (
+                  [
+                    { subject: "Mathematics", grade: "A*", predicted: false },
+                    {
+                      subject: "Further Mathematics",
+                      grade: "A*",
+                      predicted: true,
+                    },
+                    { subject: "Physics", grade: "A", predicted: true },
+                    {
+                      subject: "Computer Science",
+                      grade: "A",
+                      predicted: true,
+                    },
+                  ] as const
+                ).map(({ subject, grade, predicted }, i, arr) => (
+                  <div
+                    key={subject}
+                    className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}
+                  >
+                    <span className="text-sm text-white/75">{subject}</span>
                     <div className="flex items-center gap-2">
-                      {internal && <span className="text-[11px] text-white/25 tracking-wide">internal</span>}
-                      <span className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
-                        internal
-                          ? "bg-white/5 border-white/10 border-dashed text-white/30"
-                          : "bg-amber-500/20 border-amber-500/35 text-amber-400"
-                      }`}>A</span>
+                      {predicted && (
+                        <span className="text-[11px] text-white/25 tracking-wide">
+                          predicted
+                        </span>
+                      )}
+                      <span
+                        className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
+                          grade === "A*"
+                            ? "bg-amber-500/20 border-amber-500/35 text-amber-400"
+                            : "bg-emerald-400/15 border-emerald-400/25 text-emerald-300"
+                        }`}
+                      >
+                        {grade}
+                      </span>
                     </div>
                   </div>
                 ))}
-                <p className="text-white/25 text-[11px] mt-4 text-center">CS grade is teacher-assessed, not externally examined</p>
-              </>)}
 
+              {/* AS-Levels */}
+              {academicsTab === "aslevel" && (
+                <>
+                  {(
+                    [
+                      { subject: "Mathematics", internal: false },
+                      { subject: "Further Mathematics", internal: false },
+                      { subject: "Physics", internal: false },
+                      { subject: "Computer Science", internal: true },
+                    ] as const
+                  ).map(({ subject, internal }, i, arr) => (
+                    <div
+                      key={subject}
+                      className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}
+                    >
+                      <span
+                        className={`text-sm ${internal ? "text-white/40" : "text-white/75"}`}
+                      >
+                        {subject}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        {internal && (
+                          <span className="text-[11px] text-white/25 tracking-wide">
+                            internal
+                          </span>
+                        )}
+                        <span
+                          className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
+                            internal
+                              ? "bg-white/5 border-white/10 border-dashed text-white/30"
+                              : "bg-amber-500/20 border-amber-500/35 text-amber-400"
+                          }`}
+                        >
+                          A
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                  <p className="text-white/25 text-[11px] mt-4 text-center">
+                    CS grade is teacher-assessed, not externally examined
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </section>
@@ -617,18 +764,42 @@ const MainContent = memo(function MainContent() {
         <section className="section section-pad">
           <div className="section-stack">
             <h2 className="section-title">Contact Me</h2>
-            <p className="text-gray-300 text-lg">Interested in contacting me? Let's build something together!</p>
+            <p className="text-gray-300 text-lg">
+              Interested in contacting me? Let's build something together!
+            </p>
             <ContactForm />
           </div>
         </section>
       </div>
       <footer className="w-full py-20 flex flex-col items-center gap-1">
-        {([
-          { label: "LinkedIn",         href: "https://www.linkedin.com/in/mohammed-aayan-pathan/", hoverCls: "hover:text-[#5ba4e0]", lineCls: "bg-[#5ba4e0]" },
-          { label: "GitHub",           href: "https://github.com/SyntaxSnipes",                   hoverCls: "hover:text-white",      lineCls: "bg-white"    },
-          { label: "Curriculum Vitae", href: "../Aayan_CV_July4B.pdf",                           hoverCls: "hover:text-cyan-300",   lineCls: "bg-cyan-400" },
-          { label: "Curriculum Vitae (Detailed)", href: "../Aayan_CV_July4A.pdf",                           hoverCls: "hover:text-cyan-300",   lineCls: "bg-cyan-400" },
-        ] as const).map(({ label, href, hoverCls, lineCls }) => (
+        {(
+          [
+            {
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/in/mohammed-aayan-pathan/",
+              hoverCls: "hover:text-[#5ba4e0]",
+              lineCls: "bg-[#5ba4e0]",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/SyntaxSnipes",
+              hoverCls: "hover:text-white",
+              lineCls: "bg-white",
+            },
+            {
+              label: "Work Curriculum Vitae",
+              href: "../Aayan_CV_July4A.pdf",
+              hoverCls: "hover:text-cyan-300",
+              lineCls: "bg-cyan-400",
+            },
+            {
+              label: "Academic Curriculum Vitae",
+              href: "../Aayan_CV_July4B.pdf",
+              hoverCls: "hover:text-cyan-300",
+              lineCls: "bg-cyan-400",
+            },
+          ] as const
+        ).map(({ label, href, hoverCls, lineCls }) => (
           <a
             key={label}
             href={href}
@@ -637,7 +808,9 @@ const MainContent = memo(function MainContent() {
             className={`relative text-4xl md:text-5xl lg:text-6xl font-bold text-white/25 ${hoverCls} transition-colors duration-300 group leading-tight`}
           >
             {label}
-            <span className={`absolute -bottom-0.5 left-0 h-px w-0 ${lineCls} transition-[width] duration-500 ease-out group-hover:w-full`} />
+            <span
+              className={`absolute -bottom-0.5 left-0 h-px w-0 ${lineCls} transition-[width] duration-500 ease-out group-hover:w-full`}
+            />
           </a>
         ))}
       </footer>

@@ -626,7 +626,8 @@ const MainContent = memo(function MainContent() {
         {([
           { label: "LinkedIn",         href: "https://www.linkedin.com/in/mohammed-aayan-pathan/", hoverCls: "hover:text-[#5ba4e0]", lineCls: "bg-[#5ba4e0]" },
           { label: "GitHub",           href: "https://github.com/SyntaxSnipes",                   hoverCls: "hover:text-white",      lineCls: "bg-white"    },
-          { label: "Curriculum Vitae", href: "../Aayan_CV_June24A.pdf",                           hoverCls: "hover:text-cyan-300",   lineCls: "bg-cyan-400" },
+          { label: "Curriculum Vitae", href: "../Aayan_CV_July4B.pdf",                           hoverCls: "hover:text-cyan-300",   lineCls: "bg-cyan-400" },
+          { label: "Curriculum Vitae (Detailed)", href: "../Aayan_CV_July4A.pdf",                           hoverCls: "hover:text-cyan-300",   lineCls: "bg-cyan-400" },
         ] as const).map(({ label, href, hoverCls, lineCls }) => (
           <a
             key={label}

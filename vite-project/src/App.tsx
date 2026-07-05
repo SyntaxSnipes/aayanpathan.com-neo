@@ -787,14 +787,14 @@ const MainContent = memo(function MainContent() {
               lineCls: "bg-white",
             },
             {
-              label: "Work Curriculum Vitae",
-              href: "../Aayan_CV_July4A.pdf",
+              label: "CV (single-page)",
+              href: "../Aayan_CV_July5A.pdf",
               hoverCls: "hover:text-cyan-300",
               lineCls: "bg-cyan-400",
             },
             {
-              label: "Academic Curriculum Vitae",
-              href: "../Aayan_CV_July4B.pdf",
+              label: "CV (full-length)",
+              href: "../Aayan_CV_July5B.pdf",
               hoverCls: "hover:text-cyan-300",
               lineCls: "bg-cyan-400",
             },

@@ -221,7 +221,7 @@ const MainContent = memo(function MainContent() {
       <div className="relative z-10 section section-pad section-stack">
         <h2 className="section-title relative z-20">About Me</h2>
         <p className="text-md md:text-xl sm:text-lg text-gray-200 max-w-xl px-6 sm:px:6 lg:px-16 xl:px-0 leading-relaxed relative z-20">
-          I'm Mohammed Aayan Pathan. I'm 17 years old and I'm from India, though
+          I'm Mohammed Aayan Pathan. I'm 18 years old and I'm from India, though
           I reside, study and work in the UAE. I've been fascinated by the
           technical ingenunity and capabilities of technology since a young age,
           and ever since, I've been on a journey to understand and leverage

@@ -440,7 +440,7 @@ const MainContent = memo(function MainContent() {
                   {
                     name: "UniMetric",
                     description:
-                      "A university ranking website that lets people choose factors that they care about, while also letting them compare multiple universities on each factor.",
+                      "Reweight QS's 10 ranking factors to build your own personalised university ranking across 1,500+ institutions and 5 years of data.",
                     note: "",
                     tags: ["React", "Vite", "TypeScript", "TailwindCSS"],
                     url: "https://syntaxsnipes.github.io/UniMetric/",
@@ -671,6 +671,38 @@ const MainContent = memo(function MainContent() {
                     </span>
                   </div>
                 ))}
+              {academicsTab === "gcse" &&
+                (
+                  [
+                    { subject: "Mathematics", grade: "9" },
+                    { subject: "Computer Science", grade: "9" },
+                    { subject: "Chemistry", grade: "9" },
+                    { subject: "Psychology", grade: "9" },
+                    { subject: "Physics", grade: "8" },
+                    { subject: "Business", grade: "8" },
+                    { subject: "English Literature", grade: "8" },
+                    { subject: "English Language", grade: "7" },
+                    { subject: "Further Pure Mathematics", grade: "7" },
+                  ] as const
+                ).map(({ subject, grade }, i, arr) => (
+                  <div
+                    key={subject}
+                    className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}
+                  >
+                    <span className="text-sm text-white/75">{subject}</span>
+                    <span
+                      className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
+                        grade === "9"
+                          ? "bg-amber-500/20 border-amber-500/35 text-amber-400"
+                          : grade === "8"
+                            ? "bg-emerald-400/15 border-emerald-400/25 text-emerald-300"
+                            : "bg-sky-400/10 border-sky-400/20 text-sky-300"
+                      }`}
+                    >
+                      {grade}
+                    </span>
+                  </div>
+                ))}
 
               {/* A-Levels */}
               {academicsTab === "alevels" &&
@@ -755,7 +787,9 @@ const MainContent = memo(function MainContent() {
           <div className="section-stack">
             <h2 className="section-title">Contact Me</h2>
             <p className="text-gray-300 text-lg">
+              
               Interested in contacting me? Let's build something together!
+            
             </p>
             <ContactForm />
           </div>
@@ -792,6 +826,9 @@ const MainContent = memo(function MainContent() {
             className={`relative text-4xl md:text-5xl lg:text-6xl font-bold text-white/25 ${hoverCls} transition-colors duration-300 group leading-tight`}
           >
             {label}
+            <span
+              className={`absolute -bottom-0.5 left-0 h-px w-0 ${lineCls} transition-[width] duration-500 ease-out group-hover:w-full`}
+            />
             <span
               className={`absolute -bottom-0.5 left-0 h-px w-0 ${lineCls} transition-[width] duration-500 ease-out group-hover:w-full`}
             />

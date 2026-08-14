@@ -671,38 +671,6 @@ const MainContent = memo(function MainContent() {
                     </span>
                   </div>
                 ))}
-              {academicsTab === "gcse" &&
-                (
-                  [
-                    { subject: "Mathematics", grade: "9" },
-                    { subject: "Computer Science", grade: "9" },
-                    { subject: "Chemistry", grade: "9" },
-                    { subject: "Psychology", grade: "9" },
-                    { subject: "Physics", grade: "8" },
-                    { subject: "Business", grade: "8" },
-                    { subject: "English Literature", grade: "8" },
-                    { subject: "English Language", grade: "7" },
-                    { subject: "Further Pure Mathematics", grade: "7" },
-                  ] as const
-                ).map(({ subject, grade }, i, arr) => (
-                  <div
-                    key={subject}
-                    className={`flex items-center justify-between py-2.5 -mx-2 px-2 rounded-lg hover:bg-white/5 transition-colors duration-150 ${i < arr.length - 1 ? "border-b border-white/[0.07]" : ""}`}
-                  >
-                    <span className="text-sm text-white/75">{subject}</span>
-                    <span
-                      className={`text-xs font-bold inline-flex items-center justify-center min-w-[2.25rem] py-0.5 rounded-full border ${
-                        grade === "9"
-                          ? "bg-amber-500/20 border-amber-500/35 text-amber-400"
-                          : grade === "8"
-                            ? "bg-emerald-400/15 border-emerald-400/25 text-emerald-300"
-                            : "bg-sky-400/10 border-sky-400/20 text-sky-300"
-                      }`}
-                    >
-                      {grade}
-                    </span>
-                  </div>
-                ))}
 
               {/* A-Levels */}
               {academicsTab === "alevels" &&

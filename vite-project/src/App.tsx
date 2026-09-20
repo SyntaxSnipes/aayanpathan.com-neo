@@ -780,7 +780,7 @@ const MainContent = memo(function MainContent() {
             },
             {
               label: "Curriculum Vitae",
-              href: "../Aayan_CV_March15.pdf",
+              href: "../Aayan_CV_July5A.pdf",
               hoverCls: "hover:text-cyan-300",
               lineCls: "bg-cyan-400",
             },

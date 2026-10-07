@@ -225,9 +225,7 @@ const MainContent = memo(function MainContent() {
           I reside, study and work in the UAE. I've been fascinated by the
           technical ingenunity and capabilities of technology since a young age,
           and ever since, I've been on a journey to understand and leverage
-          technology for practically everything! I am currently in Year 13, on
-          my last year of the A-Level course in GEMS Founders School Al Barsha,
-          and will be applying for a BSc in Computer Science at university.
+          technology for practically everything! I am currently a freshman majoring in Computer Science at the American University of Sharjah.
           <br />
           <br />I am a full-stack web developer, specializing in Next.js and
           TailwindCSS. I'm flexible with SQL approaches such as MySQL or No-SQL

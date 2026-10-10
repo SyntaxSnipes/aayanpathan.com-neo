@@ -3,7 +3,7 @@ import { SyncLoader } from "react-spinners";
 import { Typewriter } from "react-simple-typewriter";
 import FMImg from "./assets/FMss.png";
 import voxa from "./assets/voxatextlogo.svg";
-import ausEmblem from "./assets/aus-emblem.png";
+import ausEmblem from "../public/auslogo.svg"
 import Marquee from "react-fast-marquee";
 import tlsearch from "./assets/tlsearch.png";
 import unimetric from "./assets/UMss.png";
@@ -193,16 +193,24 @@ const ContactForm = memo(function ContactForm() {
     const formEl = form.current;
     if (!formEl) return;
 
-    const userName = formEl.user_name.value;
-    const userEmail = formEl.user_email.value;
+    const formData = new FormData(formEl);
+    const userName = String(formData.get("name") ?? "");
+    const userEmail = String(formData.get("email") ?? "");
+    const message = String(formData.get("message") ?? "");
     setSubmitState("sent");
     formEl.reset();
 
     emailjs
-      .sendForm(
+      .send(
         "service_2zlojgi",
         "template_1deljjl",
-        formEl,
+        {
+          name: userName,
+          email: userEmail,
+          message,
+          user_name: userName,
+          user_email: userEmail,
+        },
         "cvuiRUMw64Soebb11",
       )
       .then(() => {
@@ -213,8 +221,11 @@ const ContactForm = memo(function ContactForm() {
             "service_2zlojgi",
             "template_9hll0nc",
             {
+              name: userName,
+              email: userEmail,
               user_name: userName,
               user_email: userEmail,
+              message,
             },
             "cvuiRUMw64Soebb11",
           )
@@ -247,7 +258,7 @@ const ContactForm = memo(function ContactForm() {
     >
       <input
         type="text"
-        name="user_name"
+        name="name"
         placeholder="Your Name"
         required
         className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#8fa2f8] focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"
@@ -255,7 +266,7 @@ const ContactForm = memo(function ContactForm() {
 
       <input
         type="email"
-        name="user_email"
+        name="email"
         placeholder="Your Email"
         required
         className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#8fa2f8] focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"

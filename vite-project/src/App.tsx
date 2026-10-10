@@ -444,7 +444,7 @@ const MainContent = memo(function MainContent() {
                       </h4>
                     </div>
                     <p className="text-sm text-gray-400">
-                      October 2025 — April 2026
+                      October 2025 - April 2026
                     </p>
                   </div>
 
@@ -572,7 +572,7 @@ const MainContent = memo(function MainContent() {
                   {
                     name: "Voxa Voice App",
                     description:
-                      "An AI-powered public speaking coach built with Next.js and TypeScript. Features real-time voice transcription via AssemblyAI, instant personalised feedback powered by OpenAI, a gamified progress system, and a community platform — backed by Firebase and Supabase.",
+                      "An AI-powered public speaking coach built with Next.js and TypeScript. Features real-time voice transcription via AssemblyAI, instant personalised feedback powered by OpenAI, a gamified progress system, and a community platform - backed by Firebase and Supabase.",
                     note: "",
                     tags: [
                       "Next.js",
@@ -751,7 +751,7 @@ const MainContent = memo(function MainContent() {
                     </p>
                   </div>
                   <span className="col-span-2 mt-1 w-fit whitespace-nowrap rounded-full border border-white/15 bg-white/[0.05] px-3 py-1 text-xs font-medium text-white/65">
-                    2026 — 2030
+                    2026 - 2030
                   </span>
                 </div>
                 <p className="mt-4 max-w-prose text-sm leading-relaxed text-white/65">
@@ -793,7 +793,7 @@ const MainContent = memo(function MainContent() {
                       },
                       {
                         title: "AUS",
-                        detail: "2026 — Now",
+                        detail: "2026 - Now",
                         caption: "",
                         active: true,
                       },
@@ -834,7 +834,7 @@ const MainContent = memo(function MainContent() {
                     School qualifications
                   </p>
                   <p className="mt-1 text-white/30 text-xs">
-                    GEMS Founders School — Al Barsha
+                    GEMS Founders School - Al Barsha
                   </p>
                 </div>
 

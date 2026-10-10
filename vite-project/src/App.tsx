@@ -1041,7 +1041,7 @@ const MainContent = memo(function MainContent() {
 });
 
 const Loader: React.FC = () => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0f0f17]">
+  <div className="site-loader flex items-center justify-center bg-[#0f0f17]">
     <SyncLoader color="#ffffff" loading size={50} />
   </div>
 );

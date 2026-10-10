@@ -705,7 +705,7 @@ const MainContent = memo(function MainContent() {
 
             <Marquee autoFill pauseOnHover speed={75} className="py-2">
               {techs.map(({ src, url }, i) => {
-                const isExpressOrNext = src === EXPRESS || src === NEXT;
+                const isExpressOrNext = src === EXPRESS;
                 return (
                   <a
                     key={i}

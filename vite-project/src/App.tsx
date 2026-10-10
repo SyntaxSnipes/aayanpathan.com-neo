@@ -83,7 +83,7 @@ function ConstellationBackground() {
         const proximity = Math.max(0, 1 - distanceToPointer / 180);
         context.beginPath();
         context.arc(x, y, 1.2 + proximity * 1.5, 0, Math.PI * 2);
-        context.fillStyle = `rgba(125, 211, 252, ${0.3 + proximity * 0.45})`;
+        context.fillStyle = `rgba(143, 162, 248, ${0.3 + proximity * 0.45})`;
         context.fill();
       });
 
@@ -102,7 +102,7 @@ function ConstellationBackground() {
           context.beginPath();
           context.moveTo(firstX, firstY);
           context.lineTo(second.x * width, second.y * height);
-          context.strokeStyle = `rgba(125, 211, 252, ${opacity})`;
+          context.strokeStyle = `rgba(143, 162, 248, ${opacity})`;
           context.lineWidth = 1;
           context.stroke();
         }
@@ -183,12 +183,20 @@ function useVantaNet(ref: React.RefObject<HTMLDivElement | null>) {
 
 const ContactForm = memo(function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
+  const [submitState, setSubmitState] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formEl = form.current;
     if (!formEl) return;
+
+    const userName = formEl.user_name.value;
+    const userEmail = formEl.user_email.value;
+    setSubmitState("sent");
+    formEl.reset();
 
     emailjs
       .sendForm(
@@ -205,8 +213,8 @@ const ContactForm = memo(function ContactForm() {
             "service_2zlojgi",
             "template_9hll0nc",
             {
-              user_name: formEl.user_name.value,
-              user_email: formEl.user_email.value,
+              user_name: userName,
+              user_email: userEmail,
             },
             "cvuiRUMw64Soebb11",
           )
@@ -220,8 +228,6 @@ const ContactForm = memo(function ContactForm() {
       .catch((error) => {
         console.error("Main email failed ❌", error);
       });
-
-    formEl.reset();
   };
 
   return (
@@ -236,7 +242,7 @@ const ContactForm = memo(function ContactForm() {
         shadow-2xl
         p-8 space-y-6
         transition-all duration-500
-        hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-white/40
+        hover:shadow-2xl hover:shadow-[#8fa2f8]/20 hover:border-white/40
       "
     >
       <input
@@ -244,7 +250,7 @@ const ContactForm = memo(function ContactForm() {
         name="user_name"
         placeholder="Your Name"
         required
-        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"
+        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#8fa2f8] focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"
       />
 
       <input
@@ -252,7 +258,7 @@ const ContactForm = memo(function ContactForm() {
         name="user_email"
         placeholder="Your Email"
         required
-        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"
+        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#8fa2f8] focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30"
       />
 
       <textarea
@@ -260,19 +266,44 @@ const ContactForm = memo(function ContactForm() {
         placeholder="Your Message"
         rows={5}
         required
-        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30 resize-none"
+        className="w-full px-4 py-3 rounded-xl bg-white/7 border border-white/20 placeholder-gray-400 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#8fa2f8] focus:bg-white/12 focus:border-white/40 hover:bg-white/10 hover:border-white/30 resize-none"
       />
+
+      {submitState === "sent" && (
+        <p
+          role="status"
+          className="rounded-xl border border-emerald-400/40 bg-emerald-400/10 px-4 py-3 text-center text-sm font-medium text-emerald-200"
+        >
+          Message sent successfully. Thanks for reaching out!
+        </p>
+      )}
+
+      {submitState === "error" && (
+        <p
+          role="alert"
+          className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-center text-sm font-medium text-red-200"
+        >
+          Something went wrong while sending your message. Please try again.
+        </p>
+      )}
 
       <button
         type="submit"
-        className="
-          w-full bg-gradient-to-r from-cyan-500 to-blue-500
-          text-white font-bold py-3 rounded-xl
-          active:scale-95
-          tracking-wide text-sm cursor-pointer
-        "
+        disabled={submitState === "sending" || submitState === "sent"}
+        className={`
+          w-full text-white font-bold py-3 rounded-xl
+          active:scale-95 tracking-wide text-sm
+          ${submitState === "sent"
+            ? "cursor-default bg-emerald-500/80"
+            : "cursor-pointer bg-gradient-to-r from-[#8fa2f8] to-[#8fa2f8]"}
+          disabled:cursor-not-allowed disabled:opacity-60
+        `}
       >
-        Send Message
+        {submitState === "sending"
+          ? "Sending..."
+          : submitState === "sent"
+            ? "Message Sent ✓"
+            : "Send Message"}
       </button>
     </form>
   );
@@ -569,12 +600,12 @@ const MainContent = memo(function MainContent() {
                     url: "https://syntaxsnipes.github.io/UniMetric/",
                     image: unimetric,
                     isLogo: false,
-                    border: "border-cyan-400/35",
-                    accent: "via-cyan-400/55",
-                    bg: "from-cyan-500/15 via-cyan-500/5 to-black/75",
+                    border: "border-[#8fa2f8]/35",
+                    accent: "via-[#8fa2f8]/55",
+                    bg: "from-[#8fa2f8]/15 via-[#8fa2f8]/5 to-black/75",
                     tagCls:
-                      "bg-cyan-400/10 border-cyan-400/20 text-cyan-200/80",
-                    linkCls: "text-cyan-300",
+                      "bg-[#8fa2f8]/10 border-[#8fa2f8]/20 text-[#8fa2f8]/80",
+                    linkCls: "text-[#8fa2f8]",
                   },
                 ] as const
               ).map((p, i) => (
@@ -692,45 +723,6 @@ const MainContent = memo(function MainContent() {
           </div>
         </section>
 
-        <section className="section section-pad">
-          <div className="section-stack my-3">
-            <h2 className="section-title">Technologies</h2>
-          </div>
-
-          {/* Full-bleed marquee (escapes the centered container) */}
-          <div className="relative w-screen max-w-[100vw] left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden isolate">
-            {/* Edge fades to page background (#0f0f17) */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-32 z-20 bg-gradient-to-r from-[#0f0f17] to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 z-20 bg-gradient-to-l from-[#0f0f17] to-transparent" />
-
-            <Marquee autoFill pauseOnHover speed={75} className="py-2">
-              {techs.map(({ src, url }, i) => {
-                const isExpressOrNext = src === EXPRESS;
-                return (
-                  <a
-                    key={i}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-pointer"
-                  >
-                    <img
-                      src={src}
-                      alt=""
-                      loading="lazy"
-                      className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${
-                        isExpressOrNext
-                          ? "filter invert brightness-40 hover:brightness-200"
-                          : "grayscale opacity-80 hover:grayscale-0"
-                      }`}
-                    />
-                  </a>
-                );
-              })}
-            </Marquee>
-          </div>
-        </section>
-
         <section
           id="academics"
           className="section section-pad"
@@ -779,7 +771,7 @@ const MainContent = memo(function MainContent() {
                     Academic journey
                   </p>
                   <div className="relative mt-4 grid grid-cols-4 gap-2">
-                    <div className="absolute left-[12.5%] right-[12.5%] top-2.5 h-px bg-gradient-to-r from-white/20 via-sky-300/40 to-transparent" />
+                    <div className="absolute left-[12.5%] right-[12.5%] top-2.5 h-px bg-gradient-to-r from-white/20 via-[#8fa2f8]/40 to-transparent" />
                     {[
                       {
                         title: "GCSEs",
@@ -810,7 +802,7 @@ const MainContent = memo(function MainContent() {
                         <span
                           className={`relative z-10 mx-auto block h-5 w-5 rounded-full border ${
                             active
-                              ? "border-sky-300/70 bg-sky-300/20 shadow-[0_0_10px_rgba(125,211,252,0.3)]"
+                              ? "border-[#8fa2f8]/70 bg-[#8fa2f8]/20 shadow-[0_0_10px_rgba(143,162,248,0.3)]"
                               : "border-white/30 bg-[#17171f]"
                           }`}
                         />
@@ -894,7 +886,7 @@ const MainContent = memo(function MainContent() {
                           ? "bg-amber-500/20 border-amber-500/35 text-amber-400"
                           : grade === "8"
                             ? "bg-emerald-400/15 border-emerald-400/25 text-emerald-300"
-                            : "bg-sky-400/10 border-sky-400/20 text-sky-300"
+                            : "bg-[#8fa2f8]/10 border-[#8fa2f8]/20 text-[#8fa2f8]"
                       }`}
                     >
                       {grade}
@@ -985,6 +977,45 @@ const MainContent = memo(function MainContent() {
         </section>
 
         <section className="section section-pad">
+          <div className="section-stack my-3">
+            <h2 className="section-title">Technologies</h2>
+          </div>
+
+          {/* Full-bleed marquee (escapes the centered container) */}
+          <div className="relative w-screen max-w-[100vw] left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden isolate">
+            {/* Edge fades to page background (#0f0f17) */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-32 z-20 bg-gradient-to-r from-[#0f0f17] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 z-20 bg-gradient-to-l from-[#0f0f17] to-transparent" />
+
+            <Marquee autoFill pauseOnHover speed={75} className="py-2">
+              {techs.map(({ src, url }, i) => {
+                const isExpressOrNext = src === EXPRESS;
+                return (
+                  <a
+                    key={i}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src={src}
+                      alt=""
+                      loading="lazy"
+                      className={`h-28 xl:h-48 sm:h-15 mx-8 transition duration-300 ${
+                        isExpressOrNext
+                          ? "filter invert brightness-40 hover:brightness-200"
+                          : "grayscale opacity-80 hover:grayscale-0"
+                      }`}
+                    />
+                  </a>
+                );
+              })}
+            </Marquee>
+          </div>
+        </section>
+
+        <section className="section section-pad">
           <div className="section-stack">
             <h2 className="section-title">Contact Me</h2>
             <p className="text-gray-300 text-lg">
@@ -1002,8 +1033,8 @@ const MainContent = memo(function MainContent() {
             {
               label: "LinkedIn",
               href: "https://www.linkedin.com/in/mohammed-aayan-pathan/",
-              hoverCls: "hover:text-[#5ba4e0]",
-              lineCls: "bg-[#5ba4e0]",
+              hoverCls: "hover:text-[#8fa2f8]",
+              lineCls: "bg-[#8fa2f8]",
             },
             {
               label: "GitHub",
@@ -1014,8 +1045,8 @@ const MainContent = memo(function MainContent() {
             {
               label: "Curriculum Vitae",
               href: "../Aayan_CV_October10A.pdf",
-              hoverCls: "hover:text-cyan-300",
-              lineCls: "bg-cyan-400",
+              hoverCls: "hover:text-[#8fa2f8]",
+              lineCls: "bg-[#8fa2f8]",
             },
           ] as const
         ).map(({ label, href, hoverCls, lineCls }) => (
